@@ -110,8 +110,8 @@ When creating a commitment:
 
 ### Deployed Contract
 
-- **Network:** IOTA Devnet
-- **Package ID:** `0x4bc6d4cf476f46711e58a26795a610815265657f34e6efdb6b958daf841a70d7`
+- **Network:** IOTA Testnet
+- **Package ID:** `0x531b1a0cffce328dccb78192539a8f82c5eeb650051a3860c045ffffbf135925`
 
 ## 🔄 How It Works
 
