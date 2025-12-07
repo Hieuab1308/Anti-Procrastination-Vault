@@ -1,0 +1,260 @@
+[00:00:01.405] Server  LOG      ✓ Ready in 1045ms
+[00:00:06.699] Server  LOG      ○ Compiling / ...
+[00:00:08.764] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:03:14.073] Browser WARN    Dialog is changing from uncontrolled to controlled. Components should not switch from controlled to uncontrolled (or vice versa). Decide between using a controlled or uncontrolled value for the lifetime of the component.
+[00:11:28.373] Browser LOG     Commitment fields: {
+  "arbiter": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
+  "created_at": "1765076801156",
+  "deadline": "1765076880000",
+  "description": [
+    108,
+    195,
+    160,
+    109,
+    32,
+    116,
+    111,
+    195,
+    161,
+    110
+  ],
+  "id": {
+    "id": "0x51361fcdb7e9849f13381ea124e5eed97fd56e81698059a27285446dabc1e936"
+  },
+  "owner": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
+  "penalty_recipient": "0x0000000000000000000000000000000000000000000000000000000000000000",
+  "stake": {
+    "type": "0x2::coin::Coin<0x2::iota::IOTA>",
+    "fields": {
+      "balance": "100000000",
+      "id": {
+        "id": "0x3c3a7128980980a01eb561232ffc46b9fe242d8570c2614a265fef3167961824"
+      }
+    }
+  },
+  "status": 0
+}
+[00:11:28.373] Browser LOG     Commitment fields: {
+  "arbiter": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
+  "created_at": "1765076801156",
+  "deadline": "1765076880000",
+  "description": [
+    108,
+    195,
+    160,
+    109,
+    32,
+    116,
+    111,
+    195,
+    161,
+    110
+  ],
+  "id": {
+    "id": "0x51361fcdb7e9849f13381ea124e5eed97fd56e81698059a27285446dabc1e936"
+  },
+  "owner": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
+  "penalty_recipient": "0x0000000000000000000000000000000000000000000000000000000000000000",
+  "stake": {
+    "type": "0x2::coin::Coin<0x2::iota::IOTA>",
+    "fields": {
+      "balance": "100000000",
+      "id": {
+        "id": "0x3c3a7128980980a01eb561232ffc46b9fe242d8570c2614a265fef3167961824"
+      }
+    }
+  },
+  "status": 0
+}
+[00:11:31.669] Browser LOG     Commitment fields: {
+  "arbiter": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
+  "created_at": "1765076801156",
+  "deadline": "1765076880000",
+  "description": [
+    108,
+    195,
+    160,
+    109,
+    32,
+    116,
+    111,
+    195,
+    161,
+    110
+  ],
+  "id": {
+    "id": "0x51361fcdb7e9849f13381ea124e5eed97fd56e81698059a27285446dabc1e936"
+  },
+  "owner": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
+  "penalty_recipient": "0x0000000000000000000000000000000000000000000000000000000000000000",
+  "stake": {
+    "type": "0x2::coin::Coin<0x2::iota::IOTA>",
+    "fields": {
+      "balance": "100000000",
+      "id": {
+        "id": "0x3c3a7128980980a01eb561232ffc46b9fe242d8570c2614a265fef3167961824"
+      }
+    }
+  },
+  "status": 0
+}
+[00:11:31.670] Browser LOG     Commitment fields: {
+  "arbiter": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
+  "created_at": "1765076801156",
+  "deadline": "1765076880000",
+  "description": [
+    108,
+    195,
+    160,
+    109,
+    32,
+    116,
+    111,
+    195,
+    161,
+    110
+  ],
+  "id": {
+    "id": "0x51361fcdb7e9849f13381ea124e5eed97fd56e81698059a27285446dabc1e936"
+  },
+  "owner": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
+  "penalty_recipient": "0x0000000000000000000000000000000000000000000000000000000000000000",
+  "stake": {
+    "type": "0x2::coin::Coin<0x2::iota::IOTA>",
+    "fields": {
+      "balance": "100000000",
+      "id": {
+        "id": "0x3c3a7128980980a01eb561232ffc46b9fe242d8570c2614a265fef3167961824"
+      }
+    }
+  },
+  "status": 0
+}
+[00:11:36.631] Browser LOG     Commitment fields: {
+  "arbiter": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
+  "created_at": "1765076801156",
+  "deadline": "1765076880000",
+  "description": [
+    108,
+    195,
+    160,
+    109,
+    32,
+    116,
+    111,
+    195,
+    161,
+    110
+  ],
+  "id": {
+    "id": "0x51361fcdb7e9849f13381ea124e5eed97fd56e81698059a27285446dabc1e936"
+  },
+  "owner": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
+  "penalty_recipient": "0x0000000000000000000000000000000000000000000000000000000000000000",
+  "stake": {
+    "type": "0x2::coin::Coin<0x2::iota::IOTA>",
+    "fields": {
+      "balance": "100000000",
+      "id": {
+        "id": "0x3c3a7128980980a01eb561232ffc46b9fe242d8570c2614a265fef3167961824"
+      }
+    }
+  },
+  "status": 0
+}
+[00:11:36.631] Browser LOG     Commitment fields: {
+  "arbiter": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
+  "created_at": "1765076801156",
+  "deadline": "1765076880000",
+  "description": [
+    108,
+    195,
+    160,
+    109,
+    32,
+    116,
+    111,
+    195,
+    161,
+    110
+  ],
+  "id": {
+    "id": "0x51361fcdb7e9849f13381ea124e5eed97fd56e81698059a27285446dabc1e936"
+  },
+  "owner": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
+  "penalty_recipient": "0x0000000000000000000000000000000000000000000000000000000000000000",
+  "stake": {
+    "type": "0x2::coin::Coin<0x2::iota::IOTA>",
+    "fields": {
+      "balance": "100000000",
+      "id": {
+        "id": "0x3c3a7128980980a01eb561232ffc46b9fe242d8570c2614a265fef3167961824"
+      }
+    }
+  },
+  "status": 0
+}
+[00:11:37.094] Browser LOG     Commitment fields: {
+  "arbiter": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
+  "created_at": "1765076801156",
+  "deadline": "1765076880000",
+  "description": [
+    108,
+    195,
+    160,
+    109,
+    32,
+    116,
+    111,
+    195,
+    161,
+    110
+  ],
+  "id": {
+    "id": "0x51361fcdb7e9849f13381ea124e5eed97fd56e81698059a27285446dabc1e936"
+  },
+  "owner": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
+  "penalty_recipient": "0x0000000000000000000000000000000000000000000000000000000000000000",
+  "stake": {
+    "type": "0x2::coin::Coin<0x2::iota::IOTA>",
+    "fields": {
+      "balance": "0",
+      "id": {
+        "id": "0x3c3a7128980980a01eb561232ffc46b9fe242d8570c2614a265fef3167961824"
+      }
+    }
+  },
+  "status": 1
+}
+[00:11:37.094] Browser LOG     Commitment fields: {
+  "arbiter": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
+  "created_at": "1765076801156",
+  "deadline": "1765076880000",
+  "description": [
+    108,
+    195,
+    160,
+    109,
+    32,
+    116,
+    111,
+    195,
+    161,
+    110
+  ],
+  "id": {
+    "id": "0x51361fcdb7e9849f13381ea124e5eed97fd56e81698059a27285446dabc1e936"
+  },
+  "owner": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
+  "penalty_recipient": "0x0000000000000000000000000000000000000000000000000000000000000000",
+  "stake": {
+    "type": "0x2::coin::Coin<0x2::iota::IOTA>",
+    "fields": {
+      "balance": "0",
+      "id": {
+        "id": "0x3c3a7128980980a01eb561232ffc46b9fe242d8570c2614a265fef3167961824"
+      }
+    }
+  },
+  "status": 1
+}

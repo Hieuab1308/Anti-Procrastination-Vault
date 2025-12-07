@@ -1,0 +1,250 @@
+"use client"
+
+/**
+ * ============================================================================
+ * ANTI-PROCRASTINATION VAULT - MAIN INTEGRATION
+ * ============================================================================
+ * 
+ * Component chính của ứng dụng Anti-Procrastination Vault
+ * 
+ * Tính năng:
+ * - Tạo cam kết mới với IOTA stake
+ * - Xem chi tiết cam kết
+ * - Trọng tài xác nhận hoàn thành/thất bại
+ * - Claim tiền sau khi hết hạn
+ * 
+ * ============================================================================
+ */
+
+import { useCurrentAccount } from "@iota/dapp-kit"
+import { useAntiProcrastination } from "@/hooks/useAntiProcrastination"
+import { Button, Container, Flex, Heading, Text, Card, Separator } from "@radix-ui/themes"
+import ClipLoader from "react-spinners/ClipLoader"
+
+import { CreateCommitmentForm } from "@/components/CreateCommitmentForm"
+import { CommitmentCard } from "@/components/CommitmentCard"
+import { ActionButtons } from "@/components/ActionButtons"
+import { LoadCommitmentForm } from "@/components/LoadCommitmentForm"
+
+const AntiProcrastinationVault = () => {
+    const currentAccount = useCurrentAccount()
+    const {
+        data,
+        actions,
+        state,
+        commitmentId,
+        isOwner,
+        isArbiter,
+        address,
+    } = useAntiProcrastination()
+
+    const isConnected = !!currentAccount
+
+    // ============================================================================
+    // NOT CONNECTED
+    // ============================================================================
+
+    if (!isConnected) {
+        return (
+            <div style={{
+                minHeight: "100vh",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                padding: "1rem",
+                background: "linear-gradient(135deg, var(--gray-a2) 0%, var(--blue-a2) 100%)",
+            }}>
+                <Card style={{ maxWidth: "500px", width: "100%", padding: "2rem" }}>
+                    <Flex direction="column" align="center" gap="4">
+                        <Text size="8">🔒</Text>
+                        <Heading size="6" align="center">
+                            Anti-Procrastination Vault
+                        </Heading>
+                        <Text size="3" color="gray" align="center">
+                            Cam kết chống trì hoãn với IOTA
+                        </Text>
+                        <Separator size="4" />
+                        <Text align="center" color="gray">
+                            Kết nối ví IOTA của bạn để bắt đầu tạo cam kết và ép bản thân hoàn thành công việc!
+                        </Text>
+                    </Flex>
+                </Card>
+            </div>
+        )
+    }
+
+    // ============================================================================
+    // MAIN VIEW
+    // ============================================================================
+
+    return (
+        <div style={{
+            minHeight: "100vh",
+            padding: "1rem",
+            background: "linear-gradient(135deg, var(--gray-a2) 0%, var(--blue-a2) 100%)",
+        }}>
+            <Container style={{ maxWidth: "800px", margin: "0 auto" }}>
+                {/* Header */}
+                <Flex direction="column" align="center" gap="2" style={{ marginBottom: "2rem" }}>
+                    <Text size="8">🔒</Text>
+                    <Heading size="7" align="center">
+                        Anti-Procrastination Vault
+                    </Heading>
+                    <Text size="3" color="gray" align="center">
+                        Đánh vào tâm lý sợ mất tiền để ép bản thân làm việc
+                    </Text>
+                </Flex>
+
+                {/* No Commitment Loaded */}
+                {!commitmentId ? (
+                    <Flex direction="column" gap="4">
+                        {/* Create Form */}
+                        <Card style={{ padding: "1.5rem" }}>
+                            <CreateCommitmentForm
+                                onSubmit={actions.createCommitment}
+                                isPending={state.isPending}
+                                error={state.error}
+                            />
+                        </Card>
+
+                        {/* Load Existing */}
+                        <Card style={{ padding: "1.5rem" }}>
+                            <LoadCommitmentForm onLoad={actions.loadCommitment} />
+                        </Card>
+
+                        {/* How it works */}
+                        <Card style={{ padding: "1.5rem", background: "var(--blue-a2)" }}>
+                            <Heading size="4" style={{ marginBottom: "1rem" }}>
+                                📖 Cách hoạt động
+                            </Heading>
+                            <Flex direction="column" gap="3">
+                                <Flex gap="3" align="start">
+                                    <Text size="4">1️⃣</Text>
+                                    <Text>
+                                        <strong>Tạo cam kết:</strong> Gửi IOTA vào contract với mô tả nhiệm vụ và deadline.
+                                    </Text>
+                                </Flex>
+                                <Flex gap="3" align="start">
+                                    <Text size="4">2️⃣</Text>
+                                    <Text>
+                                        <strong>Chọn trọng tài:</strong> Đặt địa chỉ ví của bạn bè/giáo viên làm người xác nhận.
+                                    </Text>
+                                </Flex>
+                                <Flex gap="3" align="start">
+                                    <Text size="4">3️⃣</Text>
+                                    <Text>
+                                        <strong>Hoàn thành:</strong> Làm việc và báo cho trọng tài khi xong.
+                                    </Text>
+                                </Flex>
+                                <Flex gap="3" align="start">
+                                    <Text size="4">✅</Text>
+                                    <Text>
+                                        <strong>Thành công:</strong> Trọng tài xác nhận → Nhận lại tiền!
+                                    </Text>
+                                </Flex>
+                                <Flex gap="3" align="start">
+                                    <Text size="4">❌</Text>
+                                    <Text>
+                                        <strong>Thất bại:</strong> Không hoàn thành hoặc hết hạn → Mất tiền!
+                                    </Text>
+                                </Flex>
+                            </Flex>
+                        </Card>
+                    </Flex>
+                ) : (
+                    /* Commitment Loaded */
+                    <Flex direction="column" gap="4">
+                        {/* Loading */}
+                        {state.isLoading && !data && (
+                            <Card style={{ padding: "2rem" }}>
+                                <Flex justify="center" align="center" gap="3">
+                                    <ClipLoader size={24} />
+                                    <Text>Đang tải cam kết...</Text>
+                                </Flex>
+                            </Card>
+                        )}
+
+                        {/* Error */}
+                        {state.error && !data && (
+                            <Card style={{ padding: "1.5rem", background: "var(--red-a3)" }}>
+                                <Flex direction="column" gap="3">
+                                    <Text style={{ color: "var(--red-11)" }}>
+                                        ❌ Lỗi: {state.error.message || "Không thể tải cam kết"}
+                                    </Text>
+                                    <Text size="2" color="gray">
+                                        ID: {commitmentId}
+                                    </Text>
+                                    <Button
+                                        variant="soft"
+                                        onClick={actions.clearCommitment}
+                                    >
+                                        ← Quay lại
+                                    </Button>
+                                </Flex>
+                            </Card>
+                        )}
+
+                        {/* Commitment Data */}
+                        {data && (
+                            <>
+                                {/* Back Button */}
+                                <Button
+                                    variant="ghost"
+                                    onClick={actions.clearCommitment}
+                                    style={{ alignSelf: "flex-start" }}
+                                >
+                                    ← Tạo cam kết mới
+                                </Button>
+
+                                {/* Commitment Card */}
+                                <CommitmentCard
+                                    commitment={data}
+                                    isOwner={isOwner}
+                                    isArbiter={isArbiter}
+                                    currentAddress={address}
+                                />
+
+                                {/* Action Buttons */}
+                                <ActionButtons
+                                    commitment={data}
+                                    isArbiter={isArbiter}
+                                    isOwner={isOwner}
+                                    isPending={state.isPending}
+                                    onConfirmCompleted={() => actions.confirmCompleted(commitmentId)}
+                                    onConfirmFailed={() => actions.confirmFailed(commitmentId)}
+                                    onClaimExpired={() => actions.claimExpired(commitmentId)}
+                                />
+
+                                {/* Transaction Hash */}
+                                {state.hash && (
+                                    <Card style={{ padding: "1rem", background: "var(--green-a2)" }}>
+                                        <Text size="2" color="green">
+                                            ✅ Giao dịch thành công!
+                                        </Text>
+                                        <Text size="1" style={{
+                                            fontFamily: "monospace",
+                                            display: "block",
+                                            marginTop: "0.5rem",
+                                            wordBreak: "break-all"
+                                        }}>
+                                            Hash: {state.hash}
+                                        </Text>
+                                    </Card>
+                                )}
+                            </>
+                        )}
+                    </Flex>
+                )}
+
+                {/* Footer */}
+                <Flex justify="center" style={{ marginTop: "3rem", paddingBottom: "2rem" }}>
+                    <Text size="1" color="gray" align="center">
+                        💡 Mẹo: Đặt số tiền đủ lớn để bạn sợ mất, nhưng không quá lớn để ảnh hưởng tài chính!
+                    </Text>
+                </Flex>
+            </Container>
+        </div>
+    )
+}
+
+export default AntiProcrastinationVault
