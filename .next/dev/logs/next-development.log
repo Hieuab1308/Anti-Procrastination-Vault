@@ -1,25 +1,33 @@
-[00:00:01.405] Server  LOG      ✓ Ready in 1045ms
-[00:00:06.699] Server  LOG      ○ Compiling / ...
-[00:00:08.764] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:03:14.073] Browser WARN    Dialog is changing from uncontrolled to controlled. Components should not switch from controlled to uncontrolled (or vice versa). Decide between using a controlled or uncontrolled value for the lifetime of the component.
-[00:11:28.373] Browser LOG     Commitment fields: {
+[00:00:01.611] Server  LOG      ✓ Ready in 1193ms
+[00:00:04.691] Server  LOG      ○ Compiling / ...
+[00:00:09.424] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:00:09.924] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:01:52.265] Browser LOG     Commitment fields: {
   "arbiter": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
-  "created_at": "1765076801156",
-  "deadline": "1765076880000",
+  "created_at": "1765078491659",
+  "deadline": "1765078500000",
   "description": [
-    108,
-    195,
-    160,
-    109,
-    32,
-    116,
+    100,
     111,
-    195,
-    161,
-    110
+    32,
+    109,
+    97,
+    116,
+    104,
+    32,
+    105,
+    110,
+    32,
+    50,
+    32,
+    104,
+    111,
+    117,
+    114,
+    115
   ],
   "id": {
-    "id": "0x51361fcdb7e9849f13381ea124e5eed97fd56e81698059a27285446dabc1e936"
+    "id": "0x12b35608271638c3ffd809b3726f5ab6654d2f61166d6b8d1d2b0246dc673eef"
   },
   "owner": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
   "penalty_recipient": "0x0000000000000000000000000000000000000000000000000000000000000000",
@@ -28,30 +36,38 @@
     "fields": {
       "balance": "100000000",
       "id": {
-        "id": "0x3c3a7128980980a01eb561232ffc46b9fe242d8570c2614a265fef3167961824"
+        "id": "0xc9f31b1bec1b0b299335661e4736e918c7cf6436c0143c88c4b942258111d9a8"
       }
     }
   },
   "status": 0
 }
-[00:11:28.373] Browser LOG     Commitment fields: {
+[00:01:52.266] Browser LOG     Commitment fields: {
   "arbiter": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
-  "created_at": "1765076801156",
-  "deadline": "1765076880000",
+  "created_at": "1765078491659",
+  "deadline": "1765078500000",
   "description": [
-    108,
-    195,
-    160,
-    109,
-    32,
-    116,
+    100,
     111,
-    195,
-    161,
-    110
+    32,
+    109,
+    97,
+    116,
+    104,
+    32,
+    105,
+    110,
+    32,
+    50,
+    32,
+    104,
+    111,
+    117,
+    114,
+    115
   ],
   "id": {
-    "id": "0x51361fcdb7e9849f13381ea124e5eed97fd56e81698059a27285446dabc1e936"
+    "id": "0x12b35608271638c3ffd809b3726f5ab6654d2f61166d6b8d1d2b0246dc673eef"
   },
   "owner": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
   "penalty_recipient": "0x0000000000000000000000000000000000000000000000000000000000000000",
@@ -60,30 +76,38 @@
     "fields": {
       "balance": "100000000",
       "id": {
-        "id": "0x3c3a7128980980a01eb561232ffc46b9fe242d8570c2614a265fef3167961824"
+        "id": "0xc9f31b1bec1b0b299335661e4736e918c7cf6436c0143c88c4b942258111d9a8"
       }
     }
   },
   "status": 0
 }
-[00:11:31.669] Browser LOG     Commitment fields: {
+[00:02:00.895] Browser LOG     Commitment fields: {
   "arbiter": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
-  "created_at": "1765076801156",
-  "deadline": "1765076880000",
+  "created_at": "1765078491659",
+  "deadline": "1765078500000",
   "description": [
-    108,
-    195,
-    160,
-    109,
-    32,
-    116,
+    100,
     111,
-    195,
-    161,
-    110
+    32,
+    109,
+    97,
+    116,
+    104,
+    32,
+    105,
+    110,
+    32,
+    50,
+    32,
+    104,
+    111,
+    117,
+    114,
+    115
   ],
   "id": {
-    "id": "0x51361fcdb7e9849f13381ea124e5eed97fd56e81698059a27285446dabc1e936"
+    "id": "0x12b35608271638c3ffd809b3726f5ab6654d2f61166d6b8d1d2b0246dc673eef"
   },
   "owner": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
   "penalty_recipient": "0x0000000000000000000000000000000000000000000000000000000000000000",
@@ -92,30 +116,38 @@
     "fields": {
       "balance": "100000000",
       "id": {
-        "id": "0x3c3a7128980980a01eb561232ffc46b9fe242d8570c2614a265fef3167961824"
+        "id": "0xc9f31b1bec1b0b299335661e4736e918c7cf6436c0143c88c4b942258111d9a8"
       }
     }
   },
   "status": 0
 }
-[00:11:31.670] Browser LOG     Commitment fields: {
+[00:02:00.896] Browser LOG     Commitment fields: {
   "arbiter": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
-  "created_at": "1765076801156",
-  "deadline": "1765076880000",
+  "created_at": "1765078491659",
+  "deadline": "1765078500000",
   "description": [
-    108,
-    195,
-    160,
-    109,
-    32,
-    116,
+    100,
     111,
-    195,
-    161,
-    110
+    32,
+    109,
+    97,
+    116,
+    104,
+    32,
+    105,
+    110,
+    32,
+    50,
+    32,
+    104,
+    111,
+    117,
+    114,
+    115
   ],
   "id": {
-    "id": "0x51361fcdb7e9849f13381ea124e5eed97fd56e81698059a27285446dabc1e936"
+    "id": "0x12b35608271638c3ffd809b3726f5ab6654d2f61166d6b8d1d2b0246dc673eef"
   },
   "owner": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
   "penalty_recipient": "0x0000000000000000000000000000000000000000000000000000000000000000",
@@ -124,30 +156,39 @@
     "fields": {
       "balance": "100000000",
       "id": {
-        "id": "0x3c3a7128980980a01eb561232ffc46b9fe242d8570c2614a265fef3167961824"
+        "id": "0xc9f31b1bec1b0b299335661e4736e918c7cf6436c0143c88c4b942258111d9a8"
       }
     }
   },
   "status": 0
 }
-[00:11:36.631] Browser LOG     Commitment fields: {
+[00:02:26.890] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:02:27.466] Browser LOG     Commitment fields: {
   "arbiter": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
-  "created_at": "1765076801156",
-  "deadline": "1765076880000",
+  "created_at": "1765078491659",
+  "deadline": "1765078500000",
   "description": [
-    108,
-    195,
-    160,
-    109,
-    32,
-    116,
+    100,
     111,
-    195,
-    161,
-    110
+    32,
+    109,
+    97,
+    116,
+    104,
+    32,
+    105,
+    110,
+    32,
+    50,
+    32,
+    104,
+    111,
+    117,
+    114,
+    115
   ],
   "id": {
-    "id": "0x51361fcdb7e9849f13381ea124e5eed97fd56e81698059a27285446dabc1e936"
+    "id": "0x12b35608271638c3ffd809b3726f5ab6654d2f61166d6b8d1d2b0246dc673eef"
   },
   "owner": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
   "penalty_recipient": "0x0000000000000000000000000000000000000000000000000000000000000000",
@@ -156,30 +197,38 @@
     "fields": {
       "balance": "100000000",
       "id": {
-        "id": "0x3c3a7128980980a01eb561232ffc46b9fe242d8570c2614a265fef3167961824"
+        "id": "0xc9f31b1bec1b0b299335661e4736e918c7cf6436c0143c88c4b942258111d9a8"
       }
     }
   },
   "status": 0
 }
-[00:11:36.631] Browser LOG     Commitment fields: {
+[00:02:27.466] Browser LOG     Commitment fields: {
   "arbiter": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
-  "created_at": "1765076801156",
-  "deadline": "1765076880000",
+  "created_at": "1765078491659",
+  "deadline": "1765078500000",
   "description": [
-    108,
-    195,
-    160,
-    109,
-    32,
-    116,
+    100,
     111,
-    195,
-    161,
-    110
+    32,
+    109,
+    97,
+    116,
+    104,
+    32,
+    105,
+    110,
+    32,
+    50,
+    32,
+    104,
+    111,
+    117,
+    114,
+    115
   ],
   "id": {
-    "id": "0x51361fcdb7e9849f13381ea124e5eed97fd56e81698059a27285446dabc1e936"
+    "id": "0x12b35608271638c3ffd809b3726f5ab6654d2f61166d6b8d1d2b0246dc673eef"
   },
   "owner": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
   "penalty_recipient": "0x0000000000000000000000000000000000000000000000000000000000000000",
@@ -188,30 +237,198 @@
     "fields": {
       "balance": "100000000",
       "id": {
-        "id": "0x3c3a7128980980a01eb561232ffc46b9fe242d8570c2614a265fef3167961824"
+        "id": "0xc9f31b1bec1b0b299335661e4736e918c7cf6436c0143c88c4b942258111d9a8"
       }
     }
   },
   "status": 0
 }
-[00:11:37.094] Browser LOG     Commitment fields: {
+[00:02:31.028] Browser LOG     Commitment fields: {
   "arbiter": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
-  "created_at": "1765076801156",
-  "deadline": "1765076880000",
+  "created_at": "1765078491659",
+  "deadline": "1765078500000",
   "description": [
-    108,
-    195,
-    160,
-    109,
-    32,
-    116,
+    100,
     111,
-    195,
-    161,
-    110
+    32,
+    109,
+    97,
+    116,
+    104,
+    32,
+    105,
+    110,
+    32,
+    50,
+    32,
+    104,
+    111,
+    117,
+    114,
+    115
   ],
   "id": {
-    "id": "0x51361fcdb7e9849f13381ea124e5eed97fd56e81698059a27285446dabc1e936"
+    "id": "0x12b35608271638c3ffd809b3726f5ab6654d2f61166d6b8d1d2b0246dc673eef"
+  },
+  "owner": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
+  "penalty_recipient": "0x0000000000000000000000000000000000000000000000000000000000000000",
+  "stake": {
+    "type": "0x2::coin::Coin<0x2::iota::IOTA>",
+    "fields": {
+      "balance": "100000000",
+      "id": {
+        "id": "0xc9f31b1bec1b0b299335661e4736e918c7cf6436c0143c88c4b942258111d9a8"
+      }
+    }
+  },
+  "status": 0
+}
+[00:02:31.028] Browser LOG     Commitment fields: {
+  "arbiter": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
+  "created_at": "1765078491659",
+  "deadline": "1765078500000",
+  "description": [
+    100,
+    111,
+    32,
+    109,
+    97,
+    116,
+    104,
+    32,
+    105,
+    110,
+    32,
+    50,
+    32,
+    104,
+    111,
+    117,
+    114,
+    115
+  ],
+  "id": {
+    "id": "0x12b35608271638c3ffd809b3726f5ab6654d2f61166d6b8d1d2b0246dc673eef"
+  },
+  "owner": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
+  "penalty_recipient": "0x0000000000000000000000000000000000000000000000000000000000000000",
+  "stake": {
+    "type": "0x2::coin::Coin<0x2::iota::IOTA>",
+    "fields": {
+      "balance": "100000000",
+      "id": {
+        "id": "0xc9f31b1bec1b0b299335661e4736e918c7cf6436c0143c88c4b942258111d9a8"
+      }
+    }
+  },
+  "status": 0
+}
+[00:02:37.673] Browser LOG     Commitment fields: {
+  "arbiter": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
+  "created_at": "1765078491659",
+  "deadline": "1765078500000",
+  "description": [
+    100,
+    111,
+    32,
+    109,
+    97,
+    116,
+    104,
+    32,
+    105,
+    110,
+    32,
+    50,
+    32,
+    104,
+    111,
+    117,
+    114,
+    115
+  ],
+  "id": {
+    "id": "0x12b35608271638c3ffd809b3726f5ab6654d2f61166d6b8d1d2b0246dc673eef"
+  },
+  "owner": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
+  "penalty_recipient": "0x0000000000000000000000000000000000000000000000000000000000000000",
+  "stake": {
+    "type": "0x2::coin::Coin<0x2::iota::IOTA>",
+    "fields": {
+      "balance": "100000000",
+      "id": {
+        "id": "0xc9f31b1bec1b0b299335661e4736e918c7cf6436c0143c88c4b942258111d9a8"
+      }
+    }
+  },
+  "status": 0
+}
+[00:02:37.673] Browser LOG     Commitment fields: {
+  "arbiter": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
+  "created_at": "1765078491659",
+  "deadline": "1765078500000",
+  "description": [
+    100,
+    111,
+    32,
+    109,
+    97,
+    116,
+    104,
+    32,
+    105,
+    110,
+    32,
+    50,
+    32,
+    104,
+    111,
+    117,
+    114,
+    115
+  ],
+  "id": {
+    "id": "0x12b35608271638c3ffd809b3726f5ab6654d2f61166d6b8d1d2b0246dc673eef"
+  },
+  "owner": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
+  "penalty_recipient": "0x0000000000000000000000000000000000000000000000000000000000000000",
+  "stake": {
+    "type": "0x2::coin::Coin<0x2::iota::IOTA>",
+    "fields": {
+      "balance": "100000000",
+      "id": {
+        "id": "0xc9f31b1bec1b0b299335661e4736e918c7cf6436c0143c88c4b942258111d9a8"
+      }
+    }
+  },
+  "status": 0
+}
+[00:02:38.376] Browser LOG     Commitment fields: {
+  "arbiter": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
+  "created_at": "1765078491659",
+  "deadline": "1765078500000",
+  "description": [
+    100,
+    111,
+    32,
+    109,
+    97,
+    116,
+    104,
+    32,
+    105,
+    110,
+    32,
+    50,
+    32,
+    104,
+    111,
+    117,
+    114,
+    115
+  ],
+  "id": {
+    "id": "0x12b35608271638c3ffd809b3726f5ab6654d2f61166d6b8d1d2b0246dc673eef"
   },
   "owner": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
   "penalty_recipient": "0x0000000000000000000000000000000000000000000000000000000000000000",
@@ -220,30 +437,38 @@
     "fields": {
       "balance": "0",
       "id": {
-        "id": "0x3c3a7128980980a01eb561232ffc46b9fe242d8570c2614a265fef3167961824"
+        "id": "0xc9f31b1bec1b0b299335661e4736e918c7cf6436c0143c88c4b942258111d9a8"
       }
     }
   },
-  "status": 1
+  "status": 2
 }
-[00:11:37.094] Browser LOG     Commitment fields: {
+[00:02:38.376] Browser LOG     Commitment fields: {
   "arbiter": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
-  "created_at": "1765076801156",
-  "deadline": "1765076880000",
+  "created_at": "1765078491659",
+  "deadline": "1765078500000",
   "description": [
-    108,
-    195,
-    160,
-    109,
-    32,
-    116,
+    100,
     111,
-    195,
-    161,
-    110
+    32,
+    109,
+    97,
+    116,
+    104,
+    32,
+    105,
+    110,
+    32,
+    50,
+    32,
+    104,
+    111,
+    117,
+    114,
+    115
   ],
   "id": {
-    "id": "0x51361fcdb7e9849f13381ea124e5eed97fd56e81698059a27285446dabc1e936"
+    "id": "0x12b35608271638c3ffd809b3726f5ab6654d2f61166d6b8d1d2b0246dc673eef"
   },
   "owner": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
   "penalty_recipient": "0x0000000000000000000000000000000000000000000000000000000000000000",
@@ -252,9 +477,1476 @@
     "fields": {
       "balance": "0",
       "id": {
-        "id": "0x3c3a7128980980a01eb561232ffc46b9fe242d8570c2614a265fef3167961824"
+        "id": "0xc9f31b1bec1b0b299335661e4736e918c7cf6436c0143c88c4b942258111d9a8"
+      }
+    }
+  },
+  "status": 2
+}
+[00:02:54.398] Server  LOG      ✓ Compiled in 94ms
+[00:03:17.562] Browser LOG     Commitment fields: {
+  "arbiter": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
+  "created_at": "1765078579965",
+  "deadline": "1765082400000",
+  "description": [
+    67,
+    55,
+    81,
+    119,
+    71,
+    77,
+    115,
+    97,
+    66,
+    65,
+    109,
+    87,
+    72,
+    68,
+    107,
+    50,
+    106,
+    72,
+    110,
+    80,
+    69,
+    109,
+    80,
+    116,
+    110,
+    81,
+    113,
+    107,
+    104,
+    112,
+    54,
+    103,
+    85,
+    121,
+    87,
+    121,
+    90,
+    106,
+    53,
+    51,
+    70,
+    102,
+    120,
+    100
+  ],
+  "id": {
+    "id": "0xf49e943b567eded4f45b2fa10e38de5b7754112e5a1641cdd8ec81216b95722c"
+  },
+  "owner": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
+  "penalty_recipient": "0x0000000000000000000000000000000000000000000000000000000000000000",
+  "stake": {
+    "type": "0x2::coin::Coin<0x2::iota::IOTA>",
+    "fields": {
+      "balance": "100000000",
+      "id": {
+        "id": "0x0c7654f875212978c07ede8bac3e68e4bd79e6a9241e7e9b23e5265dbf42038b"
+      }
+    }
+  },
+  "status": 0
+}
+[00:03:17.562] Browser LOG     Commitment fields: {
+  "arbiter": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
+  "created_at": "1765078579965",
+  "deadline": "1765082400000",
+  "description": [
+    67,
+    55,
+    81,
+    119,
+    71,
+    77,
+    115,
+    97,
+    66,
+    65,
+    109,
+    87,
+    72,
+    68,
+    107,
+    50,
+    106,
+    72,
+    110,
+    80,
+    69,
+    109,
+    80,
+    116,
+    110,
+    81,
+    113,
+    107,
+    104,
+    112,
+    54,
+    103,
+    85,
+    121,
+    87,
+    121,
+    90,
+    106,
+    53,
+    51,
+    70,
+    102,
+    120,
+    100
+  ],
+  "id": {
+    "id": "0xf49e943b567eded4f45b2fa10e38de5b7754112e5a1641cdd8ec81216b95722c"
+  },
+  "owner": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
+  "penalty_recipient": "0x0000000000000000000000000000000000000000000000000000000000000000",
+  "stake": {
+    "type": "0x2::coin::Coin<0x2::iota::IOTA>",
+    "fields": {
+      "balance": "100000000",
+      "id": {
+        "id": "0x0c7654f875212978c07ede8bac3e68e4bd79e6a9241e7e9b23e5265dbf42038b"
+      }
+    }
+  },
+  "status": 0
+}
+[00:03:20.260] Browser LOG     Commitment fields: {
+  "arbiter": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
+  "created_at": "1765078579965",
+  "deadline": "1765082400000",
+  "description": [
+    67,
+    55,
+    81,
+    119,
+    71,
+    77,
+    115,
+    97,
+    66,
+    65,
+    109,
+    87,
+    72,
+    68,
+    107,
+    50,
+    106,
+    72,
+    110,
+    80,
+    69,
+    109,
+    80,
+    116,
+    110,
+    81,
+    113,
+    107,
+    104,
+    112,
+    54,
+    103,
+    85,
+    121,
+    87,
+    121,
+    90,
+    106,
+    53,
+    51,
+    70,
+    102,
+    120,
+    100
+  ],
+  "id": {
+    "id": "0xf49e943b567eded4f45b2fa10e38de5b7754112e5a1641cdd8ec81216b95722c"
+  },
+  "owner": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
+  "penalty_recipient": "0x0000000000000000000000000000000000000000000000000000000000000000",
+  "stake": {
+    "type": "0x2::coin::Coin<0x2::iota::IOTA>",
+    "fields": {
+      "balance": "100000000",
+      "id": {
+        "id": "0x0c7654f875212978c07ede8bac3e68e4bd79e6a9241e7e9b23e5265dbf42038b"
+      }
+    }
+  },
+  "status": 0
+}
+[00:03:20.260] Browser LOG     Commitment fields: {
+  "arbiter": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
+  "created_at": "1765078579965",
+  "deadline": "1765082400000",
+  "description": [
+    67,
+    55,
+    81,
+    119,
+    71,
+    77,
+    115,
+    97,
+    66,
+    65,
+    109,
+    87,
+    72,
+    68,
+    107,
+    50,
+    106,
+    72,
+    110,
+    80,
+    69,
+    109,
+    80,
+    116,
+    110,
+    81,
+    113,
+    107,
+    104,
+    112,
+    54,
+    103,
+    85,
+    121,
+    87,
+    121,
+    90,
+    106,
+    53,
+    51,
+    70,
+    102,
+    120,
+    100
+  ],
+  "id": {
+    "id": "0xf49e943b567eded4f45b2fa10e38de5b7754112e5a1641cdd8ec81216b95722c"
+  },
+  "owner": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
+  "penalty_recipient": "0x0000000000000000000000000000000000000000000000000000000000000000",
+  "stake": {
+    "type": "0x2::coin::Coin<0x2::iota::IOTA>",
+    "fields": {
+      "balance": "100000000",
+      "id": {
+        "id": "0x0c7654f875212978c07ede8bac3e68e4bd79e6a9241e7e9b23e5265dbf42038b"
+      }
+    }
+  },
+  "status": 0
+}
+[00:04:03.341] Browser LOG     Commitment fields: {
+  "arbiter": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
+  "created_at": "1765078579965",
+  "deadline": "1765082400000",
+  "description": [
+    67,
+    55,
+    81,
+    119,
+    71,
+    77,
+    115,
+    97,
+    66,
+    65,
+    109,
+    87,
+    72,
+    68,
+    107,
+    50,
+    106,
+    72,
+    110,
+    80,
+    69,
+    109,
+    80,
+    116,
+    110,
+    81,
+    113,
+    107,
+    104,
+    112,
+    54,
+    103,
+    85,
+    121,
+    87,
+    121,
+    90,
+    106,
+    53,
+    51,
+    70,
+    102,
+    120,
+    100
+  ],
+  "id": {
+    "id": "0xf49e943b567eded4f45b2fa10e38de5b7754112e5a1641cdd8ec81216b95722c"
+  },
+  "owner": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
+  "penalty_recipient": "0x0000000000000000000000000000000000000000000000000000000000000000",
+  "stake": {
+    "type": "0x2::coin::Coin<0x2::iota::IOTA>",
+    "fields": {
+      "balance": "100000000",
+      "id": {
+        "id": "0x0c7654f875212978c07ede8bac3e68e4bd79e6a9241e7e9b23e5265dbf42038b"
+      }
+    }
+  },
+  "status": 0
+}
+[00:04:03.341] Browser LOG     Commitment fields: {
+  "arbiter": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
+  "created_at": "1765078579965",
+  "deadline": "1765082400000",
+  "description": [
+    67,
+    55,
+    81,
+    119,
+    71,
+    77,
+    115,
+    97,
+    66,
+    65,
+    109,
+    87,
+    72,
+    68,
+    107,
+    50,
+    106,
+    72,
+    110,
+    80,
+    69,
+    109,
+    80,
+    116,
+    110,
+    81,
+    113,
+    107,
+    104,
+    112,
+    54,
+    103,
+    85,
+    121,
+    87,
+    121,
+    90,
+    106,
+    53,
+    51,
+    70,
+    102,
+    120,
+    100
+  ],
+  "id": {
+    "id": "0xf49e943b567eded4f45b2fa10e38de5b7754112e5a1641cdd8ec81216b95722c"
+  },
+  "owner": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
+  "penalty_recipient": "0x0000000000000000000000000000000000000000000000000000000000000000",
+  "stake": {
+    "type": "0x2::coin::Coin<0x2::iota::IOTA>",
+    "fields": {
+      "balance": "100000000",
+      "id": {
+        "id": "0x0c7654f875212978c07ede8bac3e68e4bd79e6a9241e7e9b23e5265dbf42038b"
+      }
+    }
+  },
+  "status": 0
+}
+[00:04:04.033] Browser LOG     Commitment fields: {
+  "arbiter": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
+  "created_at": "1765078579965",
+  "deadline": "1765082400000",
+  "description": [
+    67,
+    55,
+    81,
+    119,
+    71,
+    77,
+    115,
+    97,
+    66,
+    65,
+    109,
+    87,
+    72,
+    68,
+    107,
+    50,
+    106,
+    72,
+    110,
+    80,
+    69,
+    109,
+    80,
+    116,
+    110,
+    81,
+    113,
+    107,
+    104,
+    112,
+    54,
+    103,
+    85,
+    121,
+    87,
+    121,
+    90,
+    106,
+    53,
+    51,
+    70,
+    102,
+    120,
+    100
+  ],
+  "id": {
+    "id": "0xf49e943b567eded4f45b2fa10e38de5b7754112e5a1641cdd8ec81216b95722c"
+  },
+  "owner": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
+  "penalty_recipient": "0x0000000000000000000000000000000000000000000000000000000000000000",
+  "stake": {
+    "type": "0x2::coin::Coin<0x2::iota::IOTA>",
+    "fields": {
+      "balance": "0",
+      "id": {
+        "id": "0x0c7654f875212978c07ede8bac3e68e4bd79e6a9241e7e9b23e5265dbf42038b"
       }
     }
   },
   "status": 1
+}
+[00:04:04.033] Browser LOG     Commitment fields: {
+  "arbiter": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
+  "created_at": "1765078579965",
+  "deadline": "1765082400000",
+  "description": [
+    67,
+    55,
+    81,
+    119,
+    71,
+    77,
+    115,
+    97,
+    66,
+    65,
+    109,
+    87,
+    72,
+    68,
+    107,
+    50,
+    106,
+    72,
+    110,
+    80,
+    69,
+    109,
+    80,
+    116,
+    110,
+    81,
+    113,
+    107,
+    104,
+    112,
+    54,
+    103,
+    85,
+    121,
+    87,
+    121,
+    90,
+    106,
+    53,
+    51,
+    70,
+    102,
+    120,
+    100
+  ],
+  "id": {
+    "id": "0xf49e943b567eded4f45b2fa10e38de5b7754112e5a1641cdd8ec81216b95722c"
+  },
+  "owner": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
+  "penalty_recipient": "0x0000000000000000000000000000000000000000000000000000000000000000",
+  "stake": {
+    "type": "0x2::coin::Coin<0x2::iota::IOTA>",
+    "fields": {
+      "balance": "0",
+      "id": {
+        "id": "0x0c7654f875212978c07ede8bac3e68e4bd79e6a9241e7e9b23e5265dbf42038b"
+      }
+    }
+  },
+  "status": 1
+}
+[00:04:08.213] Server  LOG      ✓ Compiled in 52ms
+[00:04:23.208] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:04:23.898] Browser LOG     Commitment fields: {
+  "arbiter": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
+  "created_at": "1765078579965",
+  "deadline": "1765082400000",
+  "description": [
+    67,
+    55,
+    81,
+    119,
+    71,
+    77,
+    115,
+    97,
+    66,
+    65,
+    109,
+    87,
+    72,
+    68,
+    107,
+    50,
+    106,
+    72,
+    110,
+    80,
+    69,
+    109,
+    80,
+    116,
+    110,
+    81,
+    113,
+    107,
+    104,
+    112,
+    54,
+    103,
+    85,
+    121,
+    87,
+    121,
+    90,
+    106,
+    53,
+    51,
+    70,
+    102,
+    120,
+    100
+  ],
+  "id": {
+    "id": "0xf49e943b567eded4f45b2fa10e38de5b7754112e5a1641cdd8ec81216b95722c"
+  },
+  "owner": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
+  "penalty_recipient": "0x0000000000000000000000000000000000000000000000000000000000000000",
+  "stake": {
+    "type": "0x2::coin::Coin<0x2::iota::IOTA>",
+    "fields": {
+      "balance": "0",
+      "id": {
+        "id": "0x0c7654f875212978c07ede8bac3e68e4bd79e6a9241e7e9b23e5265dbf42038b"
+      }
+    }
+  },
+  "status": 1
+}
+[00:04:23.898] Browser LOG     Commitment fields: {
+  "arbiter": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
+  "created_at": "1765078579965",
+  "deadline": "1765082400000",
+  "description": [
+    67,
+    55,
+    81,
+    119,
+    71,
+    77,
+    115,
+    97,
+    66,
+    65,
+    109,
+    87,
+    72,
+    68,
+    107,
+    50,
+    106,
+    72,
+    110,
+    80,
+    69,
+    109,
+    80,
+    116,
+    110,
+    81,
+    113,
+    107,
+    104,
+    112,
+    54,
+    103,
+    85,
+    121,
+    87,
+    121,
+    90,
+    106,
+    53,
+    51,
+    70,
+    102,
+    120,
+    100
+  ],
+  "id": {
+    "id": "0xf49e943b567eded4f45b2fa10e38de5b7754112e5a1641cdd8ec81216b95722c"
+  },
+  "owner": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
+  "penalty_recipient": "0x0000000000000000000000000000000000000000000000000000000000000000",
+  "stake": {
+    "type": "0x2::coin::Coin<0x2::iota::IOTA>",
+    "fields": {
+      "balance": "0",
+      "id": {
+        "id": "0x0c7654f875212978c07ede8bac3e68e4bd79e6a9241e7e9b23e5265dbf42038b"
+      }
+    }
+  },
+  "status": 1
+}
+[00:05:22.795] Browser ERROR   Error creating commitment: {}
+[00:05:25.021] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:06:07.618] Browser LOG     Commitment fields: {
+  "arbiter": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
+  "created_at": "1765078753960",
+  "deadline": "1765082580000",
+  "description": [
+    100,
+    111,
+    32,
+    109,
+    97,
+    116,
+    104,
+    32,
+    105,
+    110,
+    32,
+    50,
+    32,
+    104,
+    111,
+    117,
+    114,
+    115
+  ],
+  "id": {
+    "id": "0xdcbed5fdc6c3bccf7c378a887ed5993a06ec7eadaafbfcaba4542e33dff9fc9d"
+  },
+  "owner": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
+  "penalty_recipient": "0x0000000000000000000000000000000000000000000000000000000000000000",
+  "stake": {
+    "type": "0x2::coin::Coin<0x2::iota::IOTA>",
+    "fields": {
+      "balance": "100000000",
+      "id": {
+        "id": "0xdfd2bacb6e658b28b19ff715235e9dad2aade4f3d144545463f5c79a5b04aeff"
+      }
+    }
+  },
+  "status": 0
+}
+[00:06:07.618] Browser LOG     Commitment fields: {
+  "arbiter": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
+  "created_at": "1765078753960",
+  "deadline": "1765082580000",
+  "description": [
+    100,
+    111,
+    32,
+    109,
+    97,
+    116,
+    104,
+    32,
+    105,
+    110,
+    32,
+    50,
+    32,
+    104,
+    111,
+    117,
+    114,
+    115
+  ],
+  "id": {
+    "id": "0xdcbed5fdc6c3bccf7c378a887ed5993a06ec7eadaafbfcaba4542e33dff9fc9d"
+  },
+  "owner": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
+  "penalty_recipient": "0x0000000000000000000000000000000000000000000000000000000000000000",
+  "stake": {
+    "type": "0x2::coin::Coin<0x2::iota::IOTA>",
+    "fields": {
+      "balance": "100000000",
+      "id": {
+        "id": "0xdfd2bacb6e658b28b19ff715235e9dad2aade4f3d144545463f5c79a5b04aeff"
+      }
+    }
+  },
+  "status": 0
+}
+[00:06:10.044] Browser LOG     Commitment fields: {
+  "arbiter": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
+  "created_at": "1765078753960",
+  "deadline": "1765082580000",
+  "description": [
+    100,
+    111,
+    32,
+    109,
+    97,
+    116,
+    104,
+    32,
+    105,
+    110,
+    32,
+    50,
+    32,
+    104,
+    111,
+    117,
+    114,
+    115
+  ],
+  "id": {
+    "id": "0xdcbed5fdc6c3bccf7c378a887ed5993a06ec7eadaafbfcaba4542e33dff9fc9d"
+  },
+  "owner": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
+  "penalty_recipient": "0x0000000000000000000000000000000000000000000000000000000000000000",
+  "stake": {
+    "type": "0x2::coin::Coin<0x2::iota::IOTA>",
+    "fields": {
+      "balance": "100000000",
+      "id": {
+        "id": "0xdfd2bacb6e658b28b19ff715235e9dad2aade4f3d144545463f5c79a5b04aeff"
+      }
+    }
+  },
+  "status": 0
+}
+[00:06:10.044] Browser LOG     Commitment fields: {
+  "arbiter": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
+  "created_at": "1765078753960",
+  "deadline": "1765082580000",
+  "description": [
+    100,
+    111,
+    32,
+    109,
+    97,
+    116,
+    104,
+    32,
+    105,
+    110,
+    32,
+    50,
+    32,
+    104,
+    111,
+    117,
+    114,
+    115
+  ],
+  "id": {
+    "id": "0xdcbed5fdc6c3bccf7c378a887ed5993a06ec7eadaafbfcaba4542e33dff9fc9d"
+  },
+  "owner": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
+  "penalty_recipient": "0x0000000000000000000000000000000000000000000000000000000000000000",
+  "stake": {
+    "type": "0x2::coin::Coin<0x2::iota::IOTA>",
+    "fields": {
+      "balance": "100000000",
+      "id": {
+        "id": "0xdfd2bacb6e658b28b19ff715235e9dad2aade4f3d144545463f5c79a5b04aeff"
+      }
+    }
+  },
+  "status": 0
+}
+[00:06:18.293] Browser LOG     Commitment fields: {
+  "arbiter": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
+  "created_at": "1765078753960",
+  "deadline": "1765082580000",
+  "description": [
+    100,
+    111,
+    32,
+    109,
+    97,
+    116,
+    104,
+    32,
+    105,
+    110,
+    32,
+    50,
+    32,
+    104,
+    111,
+    117,
+    114,
+    115
+  ],
+  "id": {
+    "id": "0xdcbed5fdc6c3bccf7c378a887ed5993a06ec7eadaafbfcaba4542e33dff9fc9d"
+  },
+  "owner": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
+  "penalty_recipient": "0x0000000000000000000000000000000000000000000000000000000000000000",
+  "stake": {
+    "type": "0x2::coin::Coin<0x2::iota::IOTA>",
+    "fields": {
+      "balance": "100000000",
+      "id": {
+        "id": "0xdfd2bacb6e658b28b19ff715235e9dad2aade4f3d144545463f5c79a5b04aeff"
+      }
+    }
+  },
+  "status": 0
+}
+[00:06:18.293] Browser LOG     Commitment fields: {
+  "arbiter": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
+  "created_at": "1765078753960",
+  "deadline": "1765082580000",
+  "description": [
+    100,
+    111,
+    32,
+    109,
+    97,
+    116,
+    104,
+    32,
+    105,
+    110,
+    32,
+    50,
+    32,
+    104,
+    111,
+    117,
+    114,
+    115
+  ],
+  "id": {
+    "id": "0xdcbed5fdc6c3bccf7c378a887ed5993a06ec7eadaafbfcaba4542e33dff9fc9d"
+  },
+  "owner": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
+  "penalty_recipient": "0x0000000000000000000000000000000000000000000000000000000000000000",
+  "stake": {
+    "type": "0x2::coin::Coin<0x2::iota::IOTA>",
+    "fields": {
+      "balance": "100000000",
+      "id": {
+        "id": "0xdfd2bacb6e658b28b19ff715235e9dad2aade4f3d144545463f5c79a5b04aeff"
+      }
+    }
+  },
+  "status": 0
+}
+[00:06:19.035] Browser LOG     Commitment fields: {
+  "arbiter": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
+  "created_at": "1765078753960",
+  "deadline": "1765082580000",
+  "description": [
+    100,
+    111,
+    32,
+    109,
+    97,
+    116,
+    104,
+    32,
+    105,
+    110,
+    32,
+    50,
+    32,
+    104,
+    111,
+    117,
+    114,
+    115
+  ],
+  "id": {
+    "id": "0xdcbed5fdc6c3bccf7c378a887ed5993a06ec7eadaafbfcaba4542e33dff9fc9d"
+  },
+  "owner": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
+  "penalty_recipient": "0x0000000000000000000000000000000000000000000000000000000000000000",
+  "stake": {
+    "type": "0x2::coin::Coin<0x2::iota::IOTA>",
+    "fields": {
+      "balance": "0",
+      "id": {
+        "id": "0xdfd2bacb6e658b28b19ff715235e9dad2aade4f3d144545463f5c79a5b04aeff"
+      }
+    }
+  },
+  "status": 1
+}
+[00:06:19.035] Browser LOG     Commitment fields: {
+  "arbiter": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
+  "created_at": "1765078753960",
+  "deadline": "1765082580000",
+  "description": [
+    100,
+    111,
+    32,
+    109,
+    97,
+    116,
+    104,
+    32,
+    105,
+    110,
+    32,
+    50,
+    32,
+    104,
+    111,
+    117,
+    114,
+    115
+  ],
+  "id": {
+    "id": "0xdcbed5fdc6c3bccf7c378a887ed5993a06ec7eadaafbfcaba4542e33dff9fc9d"
+  },
+  "owner": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
+  "penalty_recipient": "0x0000000000000000000000000000000000000000000000000000000000000000",
+  "stake": {
+    "type": "0x2::coin::Coin<0x2::iota::IOTA>",
+    "fields": {
+      "balance": "0",
+      "id": {
+        "id": "0xdfd2bacb6e658b28b19ff715235e9dad2aade4f3d144545463f5c79a5b04aeff"
+      }
+    }
+  },
+  "status": 1
+}
+[00:06:28.568] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:11:57.904] Browser LOG     Commitment fields: {
+  "arbiter": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
+  "created_at": "1765079111793",
+  "deadline": "1765079160000",
+  "description": [
+    100,
+    111,
+    32,
+    109,
+    97,
+    116,
+    104,
+    32,
+    105,
+    110,
+    32,
+    50,
+    32,
+    104,
+    111,
+    117,
+    114,
+    115
+  ],
+  "id": {
+    "id": "0xec066e1ccc70a24772885e71c815d07344a21fc3c064072b88fcf094fe89ada4"
+  },
+  "owner": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
+  "penalty_recipient": "0xf0498bc2b6c9a386cf6da0822ccee55f29d72a33321454631166de85bd8a4e21",
+  "stake": {
+    "type": "0x2::coin::Coin<0x2::iota::IOTA>",
+    "fields": {
+      "balance": "100000000",
+      "id": {
+        "id": "0x7592b7400f458eb4d837fbf83e9f564451648210333b701c85fb0c754fbaaaee"
+      }
+    }
+  },
+  "status": 0
+}
+[00:11:57.904] Browser LOG     Commitment fields: {
+  "arbiter": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
+  "created_at": "1765079111793",
+  "deadline": "1765079160000",
+  "description": [
+    100,
+    111,
+    32,
+    109,
+    97,
+    116,
+    104,
+    32,
+    105,
+    110,
+    32,
+    50,
+    32,
+    104,
+    111,
+    117,
+    114,
+    115
+  ],
+  "id": {
+    "id": "0xec066e1ccc70a24772885e71c815d07344a21fc3c064072b88fcf094fe89ada4"
+  },
+  "owner": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
+  "penalty_recipient": "0xf0498bc2b6c9a386cf6da0822ccee55f29d72a33321454631166de85bd8a4e21",
+  "stake": {
+    "type": "0x2::coin::Coin<0x2::iota::IOTA>",
+    "fields": {
+      "balance": "100000000",
+      "id": {
+        "id": "0x7592b7400f458eb4d837fbf83e9f564451648210333b701c85fb0c754fbaaaee"
+      }
+    }
+  },
+  "status": 0
+}
+[00:12:07.125] Browser LOG     Commitment fields: {
+  "arbiter": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
+  "created_at": "1765079111793",
+  "deadline": "1765079160000",
+  "description": [
+    100,
+    111,
+    32,
+    109,
+    97,
+    116,
+    104,
+    32,
+    105,
+    110,
+    32,
+    50,
+    32,
+    104,
+    111,
+    117,
+    114,
+    115
+  ],
+  "id": {
+    "id": "0xec066e1ccc70a24772885e71c815d07344a21fc3c064072b88fcf094fe89ada4"
+  },
+  "owner": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
+  "penalty_recipient": "0xf0498bc2b6c9a386cf6da0822ccee55f29d72a33321454631166de85bd8a4e21",
+  "stake": {
+    "type": "0x2::coin::Coin<0x2::iota::IOTA>",
+    "fields": {
+      "balance": "100000000",
+      "id": {
+        "id": "0x7592b7400f458eb4d837fbf83e9f564451648210333b701c85fb0c754fbaaaee"
+      }
+    }
+  },
+  "status": 0
+}
+[00:12:07.125] Browser LOG     Commitment fields: {
+  "arbiter": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
+  "created_at": "1765079111793",
+  "deadline": "1765079160000",
+  "description": [
+    100,
+    111,
+    32,
+    109,
+    97,
+    116,
+    104,
+    32,
+    105,
+    110,
+    32,
+    50,
+    32,
+    104,
+    111,
+    117,
+    114,
+    115
+  ],
+  "id": {
+    "id": "0xec066e1ccc70a24772885e71c815d07344a21fc3c064072b88fcf094fe89ada4"
+  },
+  "owner": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
+  "penalty_recipient": "0xf0498bc2b6c9a386cf6da0822ccee55f29d72a33321454631166de85bd8a4e21",
+  "stake": {
+    "type": "0x2::coin::Coin<0x2::iota::IOTA>",
+    "fields": {
+      "balance": "100000000",
+      "id": {
+        "id": "0x7592b7400f458eb4d837fbf83e9f564451648210333b701c85fb0c754fbaaaee"
+      }
+    }
+  },
+  "status": 0
+}
+[00:12:13.222] Browser ERROR   Error confirming completed: {}
+[00:12:13.222] Browser LOG     Commitment fields: {
+  "arbiter": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
+  "created_at": "1765079111793",
+  "deadline": "1765079160000",
+  "description": [
+    100,
+    111,
+    32,
+    109,
+    97,
+    116,
+    104,
+    32,
+    105,
+    110,
+    32,
+    50,
+    32,
+    104,
+    111,
+    117,
+    114,
+    115
+  ],
+  "id": {
+    "id": "0xec066e1ccc70a24772885e71c815d07344a21fc3c064072b88fcf094fe89ada4"
+  },
+  "owner": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
+  "penalty_recipient": "0xf0498bc2b6c9a386cf6da0822ccee55f29d72a33321454631166de85bd8a4e21",
+  "stake": {
+    "type": "0x2::coin::Coin<0x2::iota::IOTA>",
+    "fields": {
+      "balance": "100000000",
+      "id": {
+        "id": "0x7592b7400f458eb4d837fbf83e9f564451648210333b701c85fb0c754fbaaaee"
+      }
+    }
+  },
+  "status": 0
+}
+[00:12:13.222] Browser LOG     Commitment fields: {
+  "arbiter": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
+  "created_at": "1765079111793",
+  "deadline": "1765079160000",
+  "description": [
+    100,
+    111,
+    32,
+    109,
+    97,
+    116,
+    104,
+    32,
+    105,
+    110,
+    32,
+    50,
+    32,
+    104,
+    111,
+    117,
+    114,
+    115
+  ],
+  "id": {
+    "id": "0xec066e1ccc70a24772885e71c815d07344a21fc3c064072b88fcf094fe89ada4"
+  },
+  "owner": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
+  "penalty_recipient": "0xf0498bc2b6c9a386cf6da0822ccee55f29d72a33321454631166de85bd8a4e21",
+  "stake": {
+    "type": "0x2::coin::Coin<0x2::iota::IOTA>",
+    "fields": {
+      "balance": "100000000",
+      "id": {
+        "id": "0x7592b7400f458eb4d837fbf83e9f564451648210333b701c85fb0c754fbaaaee"
+      }
+    }
+  },
+  "status": 0
+}
+[00:13:04.583] Browser LOG     Commitment fields: {
+  "arbiter": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
+  "created_at": "1765079111793",
+  "deadline": "1765079160000",
+  "description": [
+    100,
+    111,
+    32,
+    109,
+    97,
+    116,
+    104,
+    32,
+    105,
+    110,
+    32,
+    50,
+    32,
+    104,
+    111,
+    117,
+    114,
+    115
+  ],
+  "id": {
+    "id": "0xec066e1ccc70a24772885e71c815d07344a21fc3c064072b88fcf094fe89ada4"
+  },
+  "owner": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
+  "penalty_recipient": "0xf0498bc2b6c9a386cf6da0822ccee55f29d72a33321454631166de85bd8a4e21",
+  "stake": {
+    "type": "0x2::coin::Coin<0x2::iota::IOTA>",
+    "fields": {
+      "balance": "100000000",
+      "id": {
+        "id": "0x7592b7400f458eb4d837fbf83e9f564451648210333b701c85fb0c754fbaaaee"
+      }
+    }
+  },
+  "status": 0
+}
+[00:13:04.583] Browser LOG     Commitment fields: {
+  "arbiter": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
+  "created_at": "1765079111793",
+  "deadline": "1765079160000",
+  "description": [
+    100,
+    111,
+    32,
+    109,
+    97,
+    116,
+    104,
+    32,
+    105,
+    110,
+    32,
+    50,
+    32,
+    104,
+    111,
+    117,
+    114,
+    115
+  ],
+  "id": {
+    "id": "0xec066e1ccc70a24772885e71c815d07344a21fc3c064072b88fcf094fe89ada4"
+  },
+  "owner": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
+  "penalty_recipient": "0xf0498bc2b6c9a386cf6da0822ccee55f29d72a33321454631166de85bd8a4e21",
+  "stake": {
+    "type": "0x2::coin::Coin<0x2::iota::IOTA>",
+    "fields": {
+      "balance": "100000000",
+      "id": {
+        "id": "0x7592b7400f458eb4d837fbf83e9f564451648210333b701c85fb0c754fbaaaee"
+      }
+    }
+  },
+  "status": 0
+}
+[00:13:11.921] Browser LOG     Commitment fields: {
+  "arbiter": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
+  "created_at": "1765079111793",
+  "deadline": "1765079160000",
+  "description": [
+    100,
+    111,
+    32,
+    109,
+    97,
+    116,
+    104,
+    32,
+    105,
+    110,
+    32,
+    50,
+    32,
+    104,
+    111,
+    117,
+    114,
+    115
+  ],
+  "id": {
+    "id": "0xec066e1ccc70a24772885e71c815d07344a21fc3c064072b88fcf094fe89ada4"
+  },
+  "owner": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
+  "penalty_recipient": "0xf0498bc2b6c9a386cf6da0822ccee55f29d72a33321454631166de85bd8a4e21",
+  "stake": {
+    "type": "0x2::coin::Coin<0x2::iota::IOTA>",
+    "fields": {
+      "balance": "100000000",
+      "id": {
+        "id": "0x7592b7400f458eb4d837fbf83e9f564451648210333b701c85fb0c754fbaaaee"
+      }
+    }
+  },
+  "status": 0
+}
+[00:13:11.921] Browser LOG     Commitment fields: {
+  "arbiter": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
+  "created_at": "1765079111793",
+  "deadline": "1765079160000",
+  "description": [
+    100,
+    111,
+    32,
+    109,
+    97,
+    116,
+    104,
+    32,
+    105,
+    110,
+    32,
+    50,
+    32,
+    104,
+    111,
+    117,
+    114,
+    115
+  ],
+  "id": {
+    "id": "0xec066e1ccc70a24772885e71c815d07344a21fc3c064072b88fcf094fe89ada4"
+  },
+  "owner": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
+  "penalty_recipient": "0xf0498bc2b6c9a386cf6da0822ccee55f29d72a33321454631166de85bd8a4e21",
+  "stake": {
+    "type": "0x2::coin::Coin<0x2::iota::IOTA>",
+    "fields": {
+      "balance": "100000000",
+      "id": {
+        "id": "0x7592b7400f458eb4d837fbf83e9f564451648210333b701c85fb0c754fbaaaee"
+      }
+    }
+  },
+  "status": 0
+}
+[00:13:12.512] Browser LOG     Commitment fields: {
+  "arbiter": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
+  "created_at": "1765079111793",
+  "deadline": "1765079160000",
+  "description": [
+    100,
+    111,
+    32,
+    109,
+    97,
+    116,
+    104,
+    32,
+    105,
+    110,
+    32,
+    50,
+    32,
+    104,
+    111,
+    117,
+    114,
+    115
+  ],
+  "id": {
+    "id": "0xec066e1ccc70a24772885e71c815d07344a21fc3c064072b88fcf094fe89ada4"
+  },
+  "owner": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
+  "penalty_recipient": "0xf0498bc2b6c9a386cf6da0822ccee55f29d72a33321454631166de85bd8a4e21",
+  "stake": {
+    "type": "0x2::coin::Coin<0x2::iota::IOTA>",
+    "fields": {
+      "balance": "0",
+      "id": {
+        "id": "0x7592b7400f458eb4d837fbf83e9f564451648210333b701c85fb0c754fbaaaee"
+      }
+    }
+  },
+  "status": 2
+}
+[00:13:12.512] Browser LOG     Commitment fields: {
+  "arbiter": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
+  "created_at": "1765079111793",
+  "deadline": "1765079160000",
+  "description": [
+    100,
+    111,
+    32,
+    109,
+    97,
+    116,
+    104,
+    32,
+    105,
+    110,
+    32,
+    50,
+    32,
+    104,
+    111,
+    117,
+    114,
+    115
+  ],
+  "id": {
+    "id": "0xec066e1ccc70a24772885e71c815d07344a21fc3c064072b88fcf094fe89ada4"
+  },
+  "owner": "0xff392d9359e5a4edafe5209b20b090c35dcb20e1c65ac6a29a7090904107d88f",
+  "penalty_recipient": "0xf0498bc2b6c9a386cf6da0822ccee55f29d72a33321454631166de85bd8a4e21",
+  "stake": {
+    "type": "0x2::coin::Coin<0x2::iota::IOTA>",
+    "fields": {
+      "balance": "0",
+      "id": {
+        "id": "0x7592b7400f458eb4d837fbf83e9f564451648210333b701c85fb0c754fbaaaee"
+      }
+    }
+  },
+  "status": 2
 }

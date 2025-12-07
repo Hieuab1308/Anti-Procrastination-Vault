@@ -5,12 +5,12 @@
  * CREATE COMMITMENT FORM
  * ============================================================================
  * 
- * Form để tạo cam kết chống trì hoãn mới
+ * Form to create a new anti-procrastination commitment
  * 
  * ============================================================================
  */
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useCurrentAccount } from "@iota/dapp-kit"
 import { Button, Flex, Text, TextField, TextArea } from "@radix-ui/themes"
 import ClipLoader from "react-spinners/ClipLoader"
@@ -44,6 +44,13 @@ export const CreateCommitmentForm = ({
     const [deadlineTime, setDeadlineTime] = useState("")
     const [formError, setFormError] = useState<string | null>(null)
 
+    // Set default deadline to 1 hour from now on first render
+    useEffect(() => {
+        const oneHourLater = new Date(Date.now() + 60 * 60 * 1000)
+        setDeadlineDate(oneHourLater.toISOString().split("T")[0])
+        setDeadlineTime(oneHourLater.toTimeString().slice(0, 5))
+    }, [])
+
     // Set default penalty recipient to burn address
     const BURN_ADDRESS = "0x0000000000000000000000000000000000000000000000000000000000000000"
 
@@ -60,28 +67,28 @@ export const CreateCommitmentForm = ({
 
         // Validate
         if (!stakeIota || parseFloat(stakeIota) <= 0) {
-            setFormError("Vui lòng nhập số IOTA hợp lệ")
+            setFormError("Please enter a valid IOTA amount")
             return
         }
 
         if (!isValidAddress(arbiter)) {
-            setFormError("Địa chỉ trọng tài không hợp lệ. Địa chỉ IOTA phải bắt đầu bằng 0x và có 64 ký tự hex (tổng 66 ký tự)")
+            setFormError("Invalid arbiter address. IOTA address must start with 0x and have 64 hex characters (66 total)")
             return
         }
 
         if (!description.trim()) {
-            setFormError("Vui lòng nhập mô tả cam kết")
+            setFormError("Please enter a commitment description")
             return
         }
 
         if (!deadlineDate || !deadlineTime) {
-            setFormError("Vui lòng chọn thời hạn hoàn thành")
+            setFormError("Please select a deadline")
             return
         }
 
         const deadlineTimestamp = new Date(`${deadlineDate}T${deadlineTime}`).getTime()
         if (deadlineTimestamp <= Date.now()) {
-            setFormError("Thời hạn phải trong tương lai")
+            setFormError("Deadline must be in the future")
             return
         }
 
@@ -106,13 +113,13 @@ export const CreateCommitmentForm = ({
         <form onSubmit={handleSubmit}>
             <Flex direction="column" gap="4">
                 <Text size="5" weight="bold" style={{ marginBottom: "0.5rem" }}>
-                    🔒 Tạo Cam Kết Mới
+                    🔒 Create New Commitment
                 </Text>
 
                 {/* Stake Amount */}
                 <div>
                     <Text size="2" weight="medium" style={{ marginBottom: "0.25rem", display: "block" }}>
-                        💰 Số IOTA đặt cọc
+                        💰 IOTA Stake Amount
                     </Text>
                     <TextField.Root
                         type="number"
@@ -123,17 +130,17 @@ export const CreateCommitmentForm = ({
                         onChange={(e) => setStakeIota(e.target.value)}
                     />
                     <Text size="1" color="gray" style={{ marginTop: "0.25rem" }}>
-                        Số tiền này sẽ bị mất nếu bạn không hoàn thành cam kết
+                        This amount will be lost if you don't complete your commitment
                     </Text>
                 </div>
 
                 {/* Description */}
                 <div>
                     <Text size="2" weight="medium" style={{ marginBottom: "0.25rem", display: "block" }}>
-                        📝 Mô tả cam kết
+                        📝 Commitment Description
                     </Text>
                     <TextArea
-                        placeholder="Ví dụ: Tôi sẽ hoàn thành bài tập Toán chương 5 trước 10 giờ tối nay"
+                        placeholder="E.g.: I will finish my Math homework Chapter 5 before 10 PM tonight"
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
                         style={{ minHeight: "80px" }}
@@ -143,7 +150,7 @@ export const CreateCommitmentForm = ({
                 {/* Arbiter Address */}
                 <div>
                     <Text size="2" weight="medium" style={{ marginBottom: "0.25rem", display: "block" }}>
-                        👨‍⚖️ Địa chỉ Trọng tài (Arbiter)
+                        👨‍⚖️ Arbiter Address
                     </Text>
                     <Flex gap="2" align="end">
                         <TextField.Root
@@ -160,35 +167,35 @@ export const CreateCommitmentForm = ({
                             onClick={() => setArbiter(myAddress)}
                             disabled={!myAddress}
                         >
-                            Dùng địa chỉ của tôi
+                            Use my address
                         </Button>
                     </Flex>
                     <Text size="1" color="gray" style={{ marginTop: "0.25rem" }}>
-                        Người này sẽ xác nhận bạn đã hoàn thành hay chưa.
-                        <strong> Để test:</strong> dùng địa chỉ của chính bạn làm trọng tài.
+                        This person will verify if you completed your task.
+                        <strong> For testing:</strong> use your own address as arbiter.
                     </Text>
                 </div>
 
                 {/* Penalty Recipient */}
                 <div>
                     <Text size="2" weight="medium" style={{ marginBottom: "0.25rem", display: "block" }}>
-                        🔥 Địa chỉ nhận tiền phạt (tùy chọn)
+                        🔥 Penalty Recipient Address (optional)
                     </Text>
                     <TextField.Root
                         type="text"
-                        placeholder="Để trống = Burn address (đốt tiền)"
+                        placeholder="Leave empty = Burn address"
                         value={penaltyRecipient}
                         onChange={(e) => setPenaltyRecipient(e.target.value)}
                     />
                     <Text size="1" color="gray" style={{ marginTop: "0.25rem" }}>
-                        Tiền sẽ được chuyển đến địa chỉ này nếu thất bại (có thể là tổ chức từ thiện)
+                        Funds will be sent here if you fail (can be a charity address)
                     </Text>
                 </div>
 
                 {/* Deadline */}
                 <div>
                     <Text size="2" weight="medium" style={{ marginBottom: "0.25rem", display: "block" }}>
-                        ⏰ Thời hạn hoàn thành
+                        ⏰ Deadline
                     </Text>
                     <Flex gap="2">
                         <TextField.Root
@@ -230,10 +237,10 @@ export const CreateCommitmentForm = ({
                     {isPending ? (
                         <>
                             <ClipLoader size={16} color="white" />
-                            <span style={{ marginLeft: "8px" }}>Đang tạo...</span>
+                            <span style={{ marginLeft: "8px" }}>Creating...</span>
                         </>
                     ) : (
-                        "🚀 Tạo Cam Kết"
+                        "🚀 Create Commitment"
                     )}
                 </Button>
             </Flex>

@@ -434,13 +434,13 @@ const formatIota = (mist, decimals = 4)=>{
 const getStatusText = (status)=>{
     switch(status){
         case COMMITMENT_STATUS.PENDING:
-            return "⏳ Đang chờ xác nhận";
+            return "⏳ Pending";
         case COMMITMENT_STATUS.COMPLETED:
-            return "✅ Đã hoàn thành";
+            return "✅ Completed";
         case COMMITMENT_STATUS.FAILED:
-            return "❌ Thất bại";
+            return "❌ Failed";
         default:
-            return "Không xác định";
+            return "Unknown";
     }
 };
 const getStatusColor = (status)=>{
@@ -462,15 +462,15 @@ const formatTimeRemaining = (deadline)=>{
     const now = Date.now();
     const diff = deadline - now;
     if (diff <= 0) {
-        return "Đã hết hạn";
+        return "Expired";
     }
     const hours = Math.floor(diff / (1000 * 60 * 60));
     const minutes = Math.floor(diff % (1000 * 60 * 60) / (1000 * 60));
     if (hours > 24) {
         const days = Math.floor(hours / 24);
-        return `${days} ngày ${hours % 24} giờ`;
+        return `${days} days ${hours % 24} hours`;
     }
-    return `${hours} giờ ${minutes} phút`;
+    return `${hours} hours ${minutes} minutes`;
 };
 }),
 "[project]/components/CreateCommitmentForm.tsx [app-ssr] (ecmascript)", ((__turbopack_context__) => {
@@ -486,7 +486,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist
  * CREATE COMMITMENT FORM
  * ============================================================================
  * 
- * Form để tạo cam kết chống trì hoãn mới
+ * Form to create a new anti-procrastination commitment
  * 
  * ============================================================================
  */ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/server/route-modules/app-page/vendored/ssr/react.js [app-ssr] (ecmascript)");
@@ -515,6 +515,12 @@ const CreateCommitmentForm = ({ onSubmit, isPending, error })=>{
     const [deadlineDate, setDeadlineDate] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])("");
     const [deadlineTime, setDeadlineTime] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])("");
     const [formError, setFormError] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(null);
+    // Set default deadline to 1 hour from now on first render
+    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
+        const oneHourLater = new Date(Date.now() + 60 * 60 * 1000);
+        setDeadlineDate(oneHourLater.toISOString().split("T")[0]);
+        setDeadlineTime(oneHourLater.toTimeString().slice(0, 5));
+    }, []);
     // Set default penalty recipient to burn address
     const BURN_ADDRESS = "0x0000000000000000000000000000000000000000000000000000000000000000";
     // Validate IOTA address (0x + 64 hex characters = 66 total)
@@ -528,24 +534,24 @@ const CreateCommitmentForm = ({ onSubmit, isPending, error })=>{
         setFormError(null);
         // Validate
         if (!stakeIota || parseFloat(stakeIota) <= 0) {
-            setFormError("Vui lòng nhập số IOTA hợp lệ");
+            setFormError("Please enter a valid IOTA amount");
             return;
         }
         if (!isValidAddress(arbiter)) {
-            setFormError("Địa chỉ trọng tài không hợp lệ. Địa chỉ IOTA phải bắt đầu bằng 0x và có 64 ký tự hex (tổng 66 ký tự)");
+            setFormError("Invalid arbiter address. IOTA address must start with 0x and have 64 hex characters (66 total)");
             return;
         }
         if (!description.trim()) {
-            setFormError("Vui lòng nhập mô tả cam kết");
+            setFormError("Please enter a commitment description");
             return;
         }
         if (!deadlineDate || !deadlineTime) {
-            setFormError("Vui lòng chọn thời hạn hoàn thành");
+            setFormError("Please select a deadline");
             return;
         }
         const deadlineTimestamp = new Date(`${deadlineDate}T${deadlineTime}`).getTime();
         if (deadlineTimestamp <= Date.now()) {
-            setFormError("Thời hạn phải trong tương lai");
+            setFormError("Deadline must be in the future");
             return;
         }
         const finalPenaltyRecipient = penaltyRecipient.trim() || BURN_ADDRESS;
@@ -574,10 +580,10 @@ const CreateCommitmentForm = ({ onSubmit, isPending, error })=>{
                     style: {
                         marginBottom: "0.5rem"
                     },
-                    children: "🔒 Tạo Cam Kết Mới"
+                    children: "🔒 Create New Commitment"
                 }, void 0, false, {
                     fileName: "[project]/components/CreateCommitmentForm.tsx",
-                    lineNumber: 108,
+                    lineNumber: 115,
                     columnNumber: 17
                 }, ("TURBOPACK compile-time value", void 0)),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -589,10 +595,10 @@ const CreateCommitmentForm = ({ onSubmit, isPending, error })=>{
                                 marginBottom: "0.25rem",
                                 display: "block"
                             },
-                            children: "💰 Số IOTA đặt cọc"
+                            children: "💰 IOTA Stake Amount"
                         }, void 0, false, {
                             fileName: "[project]/components/CreateCommitmentForm.tsx",
-                            lineNumber: 114,
+                            lineNumber: 121,
                             columnNumber: 21
                         }, ("TURBOPACK compile-time value", void 0)),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$radix$2d$ui$2f$themes$2f$dist$2f$esm$2f$components$2f$text$2d$field$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__TextField$3e$__["TextField"].Root, {
@@ -604,7 +610,7 @@ const CreateCommitmentForm = ({ onSubmit, isPending, error })=>{
                             onChange: (e)=>setStakeIota(e.target.value)
                         }, void 0, false, {
                             fileName: "[project]/components/CreateCommitmentForm.tsx",
-                            lineNumber: 117,
+                            lineNumber: 124,
                             columnNumber: 21
                         }, ("TURBOPACK compile-time value", void 0)),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$radix$2d$ui$2f$themes$2f$dist$2f$esm$2f$components$2f$text$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Text"], {
@@ -613,16 +619,16 @@ const CreateCommitmentForm = ({ onSubmit, isPending, error })=>{
                             style: {
                                 marginTop: "0.25rem"
                             },
-                            children: "Số tiền này sẽ bị mất nếu bạn không hoàn thành cam kết"
+                            children: "This amount will be lost if you don't complete your commitment"
                         }, void 0, false, {
                             fileName: "[project]/components/CreateCommitmentForm.tsx",
-                            lineNumber: 125,
+                            lineNumber: 132,
                             columnNumber: 21
                         }, ("TURBOPACK compile-time value", void 0))
                     ]
                 }, void 0, true, {
                     fileName: "[project]/components/CreateCommitmentForm.tsx",
-                    lineNumber: 113,
+                    lineNumber: 120,
                     columnNumber: 17
                 }, ("TURBOPACK compile-time value", void 0)),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -634,14 +640,14 @@ const CreateCommitmentForm = ({ onSubmit, isPending, error })=>{
                                 marginBottom: "0.25rem",
                                 display: "block"
                             },
-                            children: "📝 Mô tả cam kết"
+                            children: "📝 Commitment Description"
                         }, void 0, false, {
                             fileName: "[project]/components/CreateCommitmentForm.tsx",
-                            lineNumber: 132,
+                            lineNumber: 139,
                             columnNumber: 21
                         }, ("TURBOPACK compile-time value", void 0)),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$radix$2d$ui$2f$themes$2f$dist$2f$esm$2f$components$2f$text$2d$area$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["TextArea"], {
-                            placeholder: "Ví dụ: Tôi sẽ hoàn thành bài tập Toán chương 5 trước 10 giờ tối nay",
+                            placeholder: "E.g.: I will finish my Math homework Chapter 5 before 10 PM tonight",
                             value: description,
                             onChange: (e)=>setDescription(e.target.value),
                             style: {
@@ -649,13 +655,13 @@ const CreateCommitmentForm = ({ onSubmit, isPending, error })=>{
                             }
                         }, void 0, false, {
                             fileName: "[project]/components/CreateCommitmentForm.tsx",
-                            lineNumber: 135,
+                            lineNumber: 142,
                             columnNumber: 21
                         }, ("TURBOPACK compile-time value", void 0))
                     ]
                 }, void 0, true, {
                     fileName: "[project]/components/CreateCommitmentForm.tsx",
-                    lineNumber: 131,
+                    lineNumber: 138,
                     columnNumber: 17
                 }, ("TURBOPACK compile-time value", void 0)),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -667,10 +673,10 @@ const CreateCommitmentForm = ({ onSubmit, isPending, error })=>{
                                 marginBottom: "0.25rem",
                                 display: "block"
                             },
-                            children: "👨‍⚖️ Địa chỉ Trọng tài (Arbiter)"
+                            children: "👨‍⚖️ Arbiter Address"
                         }, void 0, false, {
                             fileName: "[project]/components/CreateCommitmentForm.tsx",
-                            lineNumber: 145,
+                            lineNumber: 152,
                             columnNumber: 21
                         }, ("TURBOPACK compile-time value", void 0)),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$radix$2d$ui$2f$themes$2f$dist$2f$esm$2f$components$2f$flex$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Flex"], {
@@ -687,7 +693,7 @@ const CreateCommitmentForm = ({ onSubmit, isPending, error })=>{
                                     }
                                 }, void 0, false, {
                                     fileName: "[project]/components/CreateCommitmentForm.tsx",
-                                    lineNumber: 149,
+                                    lineNumber: 156,
                                     columnNumber: 25
                                 }, ("TURBOPACK compile-time value", void 0)),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$radix$2d$ui$2f$themes$2f$dist$2f$esm$2f$components$2f$button$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Button"], {
@@ -696,16 +702,16 @@ const CreateCommitmentForm = ({ onSubmit, isPending, error })=>{
                                     size: "2",
                                     onClick: ()=>setArbiter(myAddress),
                                     disabled: !myAddress,
-                                    children: "Dùng địa chỉ của tôi"
+                                    children: "Use my address"
                                 }, void 0, false, {
                                     fileName: "[project]/components/CreateCommitmentForm.tsx",
-                                    lineNumber: 156,
+                                    lineNumber: 163,
                                     columnNumber: 25
                                 }, ("TURBOPACK compile-time value", void 0))
                             ]
                         }, void 0, true, {
                             fileName: "[project]/components/CreateCommitmentForm.tsx",
-                            lineNumber: 148,
+                            lineNumber: 155,
                             columnNumber: 21
                         }, ("TURBOPACK compile-time value", void 0)),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$radix$2d$ui$2f$themes$2f$dist$2f$esm$2f$components$2f$text$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Text"], {
@@ -715,25 +721,25 @@ const CreateCommitmentForm = ({ onSubmit, isPending, error })=>{
                                 marginTop: "0.25rem"
                             },
                             children: [
-                                "Người này sẽ xác nhận bạn đã hoàn thành hay chưa.",
+                                "This person will verify if you completed your task.",
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("strong", {
-                                    children: " Để test:"
+                                    children: " For testing:"
                                 }, void 0, false, {
                                     fileName: "[project]/components/CreateCommitmentForm.tsx",
-                                    lineNumber: 168,
+                                    lineNumber: 175,
                                     columnNumber: 25
                                 }, ("TURBOPACK compile-time value", void 0)),
-                                " dùng địa chỉ của chính bạn làm trọng tài."
+                                " use your own address as arbiter."
                             ]
                         }, void 0, true, {
                             fileName: "[project]/components/CreateCommitmentForm.tsx",
-                            lineNumber: 166,
+                            lineNumber: 173,
                             columnNumber: 21
                         }, ("TURBOPACK compile-time value", void 0))
                     ]
                 }, void 0, true, {
                     fileName: "[project]/components/CreateCommitmentForm.tsx",
-                    lineNumber: 144,
+                    lineNumber: 151,
                     columnNumber: 17
                 }, ("TURBOPACK compile-time value", void 0)),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -745,20 +751,20 @@ const CreateCommitmentForm = ({ onSubmit, isPending, error })=>{
                                 marginBottom: "0.25rem",
                                 display: "block"
                             },
-                            children: "🔥 Địa chỉ nhận tiền phạt (tùy chọn)"
+                            children: "🔥 Penalty Recipient Address (optional)"
                         }, void 0, false, {
                             fileName: "[project]/components/CreateCommitmentForm.tsx",
-                            lineNumber: 174,
+                            lineNumber: 181,
                             columnNumber: 21
                         }, ("TURBOPACK compile-time value", void 0)),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$radix$2d$ui$2f$themes$2f$dist$2f$esm$2f$components$2f$text$2d$field$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__TextField$3e$__["TextField"].Root, {
                             type: "text",
-                            placeholder: "Để trống = Burn address (đốt tiền)",
+                            placeholder: "Leave empty = Burn address",
                             value: penaltyRecipient,
                             onChange: (e)=>setPenaltyRecipient(e.target.value)
                         }, void 0, false, {
                             fileName: "[project]/components/CreateCommitmentForm.tsx",
-                            lineNumber: 177,
+                            lineNumber: 184,
                             columnNumber: 21
                         }, ("TURBOPACK compile-time value", void 0)),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$radix$2d$ui$2f$themes$2f$dist$2f$esm$2f$components$2f$text$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Text"], {
@@ -767,16 +773,16 @@ const CreateCommitmentForm = ({ onSubmit, isPending, error })=>{
                             style: {
                                 marginTop: "0.25rem"
                             },
-                            children: "Tiền sẽ được chuyển đến địa chỉ này nếu thất bại (có thể là tổ chức từ thiện)"
+                            children: "Funds will be sent here if you fail (can be a charity address)"
                         }, void 0, false, {
                             fileName: "[project]/components/CreateCommitmentForm.tsx",
-                            lineNumber: 183,
+                            lineNumber: 190,
                             columnNumber: 21
                         }, ("TURBOPACK compile-time value", void 0))
                     ]
                 }, void 0, true, {
                     fileName: "[project]/components/CreateCommitmentForm.tsx",
-                    lineNumber: 173,
+                    lineNumber: 180,
                     columnNumber: 17
                 }, ("TURBOPACK compile-time value", void 0)),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -788,10 +794,10 @@ const CreateCommitmentForm = ({ onSubmit, isPending, error })=>{
                                 marginBottom: "0.25rem",
                                 display: "block"
                             },
-                            children: "⏰ Thời hạn hoàn thành"
+                            children: "⏰ Deadline"
                         }, void 0, false, {
                             fileName: "[project]/components/CreateCommitmentForm.tsx",
-                            lineNumber: 190,
+                            lineNumber: 197,
                             columnNumber: 21
                         }, ("TURBOPACK compile-time value", void 0)),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$radix$2d$ui$2f$themes$2f$dist$2f$esm$2f$components$2f$flex$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Flex"], {
@@ -807,7 +813,7 @@ const CreateCommitmentForm = ({ onSubmit, isPending, error })=>{
                                     }
                                 }, void 0, false, {
                                     fileName: "[project]/components/CreateCommitmentForm.tsx",
-                                    lineNumber: 194,
+                                    lineNumber: 201,
                                     columnNumber: 25
                                 }, ("TURBOPACK compile-time value", void 0)),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$radix$2d$ui$2f$themes$2f$dist$2f$esm$2f$components$2f$text$2d$field$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__TextField$3e$__["TextField"].Root, {
@@ -819,19 +825,19 @@ const CreateCommitmentForm = ({ onSubmit, isPending, error })=>{
                                     }
                                 }, void 0, false, {
                                     fileName: "[project]/components/CreateCommitmentForm.tsx",
-                                    lineNumber: 201,
+                                    lineNumber: 208,
                                     columnNumber: 25
                                 }, ("TURBOPACK compile-time value", void 0))
                             ]
                         }, void 0, true, {
                             fileName: "[project]/components/CreateCommitmentForm.tsx",
-                            lineNumber: 193,
+                            lineNumber: 200,
                             columnNumber: 21
                         }, ("TURBOPACK compile-time value", void 0))
                     ]
                 }, void 0, true, {
                     fileName: "[project]/components/CreateCommitmentForm.tsx",
-                    lineNumber: 189,
+                    lineNumber: 196,
                     columnNumber: 17
                 }, ("TURBOPACK compile-time value", void 0)),
                 (formError || error) && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -850,12 +856,12 @@ const CreateCommitmentForm = ({ onSubmit, isPending, error })=>{
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/CreateCommitmentForm.tsx",
-                        lineNumber: 217,
+                        lineNumber: 224,
                         columnNumber: 25
                     }, ("TURBOPACK compile-time value", void 0))
                 }, void 0, false, {
                     fileName: "[project]/components/CreateCommitmentForm.tsx",
-                    lineNumber: 212,
+                    lineNumber: 219,
                     columnNumber: 21
                 }, ("TURBOPACK compile-time value", void 0)),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$radix$2d$ui$2f$themes$2f$dist$2f$esm$2f$components$2f$button$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Button"], {
@@ -872,35 +878,35 @@ const CreateCommitmentForm = ({ onSubmit, isPending, error })=>{
                                 color: "white"
                             }, void 0, false, {
                                 fileName: "[project]/components/CreateCommitmentForm.tsx",
-                                lineNumber: 232,
+                                lineNumber: 239,
                                 columnNumber: 29
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                 style: {
                                     marginLeft: "8px"
                                 },
-                                children: "Đang tạo..."
+                                children: "Creating..."
                             }, void 0, false, {
                                 fileName: "[project]/components/CreateCommitmentForm.tsx",
-                                lineNumber: 233,
+                                lineNumber: 240,
                                 columnNumber: 29
                             }, ("TURBOPACK compile-time value", void 0))
                         ]
-                    }, void 0, true) : "🚀 Tạo Cam Kết"
+                    }, void 0, true) : "🚀 Create Commitment"
                 }, void 0, false, {
                     fileName: "[project]/components/CreateCommitmentForm.tsx",
-                    lineNumber: 224,
+                    lineNumber: 231,
                     columnNumber: 17
                 }, ("TURBOPACK compile-time value", void 0))
             ]
         }, void 0, true, {
             fileName: "[project]/components/CreateCommitmentForm.tsx",
-            lineNumber: 107,
+            lineNumber: 114,
             columnNumber: 13
         }, ("TURBOPACK compile-time value", void 0))
     }, void 0, false, {
         fileName: "[project]/components/CreateCommitmentForm.tsx",
-        lineNumber: 106,
+        lineNumber: 113,
         columnNumber: 9
     }, ("TURBOPACK compile-time value", void 0));
 };
@@ -918,7 +924,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist
  * COMMITMENT CARD
  * ============================================================================
  * 
- * Hiển thị thông tin chi tiết của một cam kết
+ * Display detailed information of a commitment
  * 
  * ============================================================================
  */ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/server/route-modules/app-page/vendored/ssr/react.js [app-ssr] (ecmascript)");
@@ -934,7 +940,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$hooks$2f$useAntiProcrastinat
 ;
 ;
 ;
-const CommitmentCard = ({ commitment, isOwner, isArbiter, currentAddress })=>{
+const CommitmentCard = ({ commitment, isOwner, isArbiter })=>{
     const [timeRemaining, setTimeRemaining] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])("");
     const [isExpired, setIsExpired] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
     // Update countdown timer
@@ -956,40 +962,40 @@ const CommitmentCard = ({ commitment, isOwner, isArbiter, currentAddress })=>{
                 return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$radix$2d$ui$2f$themes$2f$dist$2f$esm$2f$components$2f$badge$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Badge"], {
                     color: "yellow",
                     size: "2",
-                    children: "⏳ Đang chờ"
+                    children: "⏳ Pending"
                 }, void 0, false, {
                     fileName: "[project]/components/CommitmentCard.tsx",
-                    lineNumber: 55,
+                    lineNumber: 53,
                     columnNumber: 24
                 }, ("TURBOPACK compile-time value", void 0));
             case __TURBOPACK__imported__module__$5b$project$5d2f$hooks$2f$useAntiProcrastination$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["COMMITMENT_STATUS"].COMPLETED:
                 return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$radix$2d$ui$2f$themes$2f$dist$2f$esm$2f$components$2f$badge$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Badge"], {
                     color: "green",
                     size: "2",
-                    children: "✅ Hoàn thành"
+                    children: "✅ Completed"
                 }, void 0, false, {
                     fileName: "[project]/components/CommitmentCard.tsx",
-                    lineNumber: 57,
+                    lineNumber: 55,
                     columnNumber: 24
                 }, ("TURBOPACK compile-time value", void 0));
             case __TURBOPACK__imported__module__$5b$project$5d2f$hooks$2f$useAntiProcrastination$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["COMMITMENT_STATUS"].FAILED:
                 return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$radix$2d$ui$2f$themes$2f$dist$2f$esm$2f$components$2f$badge$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Badge"], {
                     color: "red",
                     size: "2",
-                    children: "❌ Thất bại"
+                    children: "❌ Failed"
                 }, void 0, false, {
                     fileName: "[project]/components/CommitmentCard.tsx",
-                    lineNumber: 59,
+                    lineNumber: 57,
                     columnNumber: 24
                 }, ("TURBOPACK compile-time value", void 0));
             default:
                 return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$radix$2d$ui$2f$themes$2f$dist$2f$esm$2f$components$2f$badge$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Badge"], {
                     color: "gray",
                     size: "2",
-                    children: "Không xác định"
+                    children: "Unknown"
                 }, void 0, false, {
                     fileName: "[project]/components/CommitmentCard.tsx",
-                    lineNumber: 61,
+                    lineNumber: 59,
                     columnNumber: 24
                 }, ("TURBOPACK compile-time value", void 0));
         }
@@ -999,7 +1005,7 @@ const CommitmentCard = ({ commitment, isOwner, isArbiter, currentAddress })=>{
         return `${addr.slice(0, 8)}...${addr.slice(-6)}`;
     };
     const formatDate = (timestamp)=>{
-        return new Date(timestamp).toLocaleString("vi-VN", {
+        return new Date(timestamp).toLocaleString("en-US", {
             dateStyle: "medium",
             timeStyle: "short"
         });
@@ -1019,17 +1025,17 @@ const CommitmentCard = ({ commitment, isOwner, isArbiter, currentAddress })=>{
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$radix$2d$ui$2f$themes$2f$dist$2f$esm$2f$components$2f$text$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Text"], {
                         size: "5",
                         weight: "bold",
-                        children: "📋 Chi tiết Cam kết"
+                        children: "📋 Commitment Details"
                     }, void 0, false, {
                         fileName: "[project]/components/CommitmentCard.tsx",
-                        lineNumber: 81,
+                        lineNumber: 79,
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0)),
                     getStatusBadge()
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/CommitmentCard.tsx",
-                lineNumber: 80,
+                lineNumber: 78,
                 columnNumber: 13
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$radix$2d$ui$2f$themes$2f$dist$2f$esm$2f$components$2f$separator$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Separator"], {
@@ -1039,7 +1045,7 @@ const CommitmentCard = ({ commitment, isOwner, isArbiter, currentAddress })=>{
                 }
             }, void 0, false, {
                 fileName: "[project]/components/CommitmentCard.tsx",
-                lineNumber: 85,
+                lineNumber: 83,
                 columnNumber: 13
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$radix$2d$ui$2f$themes$2f$dist$2f$esm$2f$components$2f$box$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Box"], {
@@ -1054,10 +1060,10 @@ const CommitmentCard = ({ commitment, isOwner, isArbiter, currentAddress })=>{
                             display: "block",
                             marginBottom: "0.25rem"
                         },
-                        children: "Mô tả cam kết:"
+                        children: "Description:"
                     }, void 0, false, {
                         fileName: "[project]/components/CommitmentCard.tsx",
-                        lineNumber: 89,
+                        lineNumber: 87,
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$radix$2d$ui$2f$themes$2f$dist$2f$esm$2f$components$2f$text$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Text"], {
@@ -1077,13 +1083,13 @@ const CommitmentCard = ({ commitment, isOwner, isArbiter, currentAddress })=>{
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/CommitmentCard.tsx",
-                        lineNumber: 92,
+                        lineNumber: 90,
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0))
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/CommitmentCard.tsx",
-                lineNumber: 88,
+                lineNumber: 86,
                 columnNumber: 13
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$radix$2d$ui$2f$themes$2f$dist$2f$esm$2f$components$2f$flex$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Flex"], {
@@ -1105,10 +1111,10 @@ const CommitmentCard = ({ commitment, isOwner, isArbiter, currentAddress })=>{
                                     display: "block",
                                     marginBottom: "0.25rem"
                                 },
-                                children: "💰 Số tiền đặt cọc:"
+                                children: "💰 Stake Amount:"
                             }, void 0, false, {
                                 fileName: "[project]/components/CommitmentCard.tsx",
-                                lineNumber: 106,
+                                lineNumber: 104,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$radix$2d$ui$2f$themes$2f$dist$2f$esm$2f$components$2f$text$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Text"], {
@@ -1118,13 +1124,13 @@ const CommitmentCard = ({ commitment, isOwner, isArbiter, currentAddress })=>{
                                 children: (0, __TURBOPACK__imported__module__$5b$project$5d2f$hooks$2f$useAntiProcrastination$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["formatIota"])(commitment.stakeAmount)
                             }, void 0, false, {
                                 fileName: "[project]/components/CommitmentCard.tsx",
-                                lineNumber: 109,
+                                lineNumber: 107,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0))
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/CommitmentCard.tsx",
-                        lineNumber: 105,
+                        lineNumber: 103,
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$radix$2d$ui$2f$themes$2f$dist$2f$esm$2f$components$2f$box$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Box"], {
@@ -1139,10 +1145,10 @@ const CommitmentCard = ({ commitment, isOwner, isArbiter, currentAddress })=>{
                                     display: "block",
                                     marginBottom: "0.25rem"
                                 },
-                                children: "⏰ Thời hạn:"
+                                children: "⏰ Deadline:"
                             }, void 0, false, {
                                 fileName: "[project]/components/CommitmentCard.tsx",
-                                lineNumber: 115,
+                                lineNumber: 113,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$radix$2d$ui$2f$themes$2f$dist$2f$esm$2f$components$2f$text$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Text"], {
@@ -1151,7 +1157,7 @@ const CommitmentCard = ({ commitment, isOwner, isArbiter, currentAddress })=>{
                                 children: formatDate(commitment.deadline)
                             }, void 0, false, {
                                 fileName: "[project]/components/CommitmentCard.tsx",
-                                lineNumber: 118,
+                                lineNumber: 116,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0)),
                             commitment.status === __TURBOPACK__imported__module__$5b$project$5d2f$hooks$2f$useAntiProcrastination$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["COMMITMENT_STATUS"].PENDING && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$radix$2d$ui$2f$themes$2f$dist$2f$esm$2f$components$2f$text$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Text"], {
@@ -1167,19 +1173,19 @@ const CommitmentCard = ({ commitment, isOwner, isArbiter, currentAddress })=>{
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/CommitmentCard.tsx",
-                                lineNumber: 122,
+                                lineNumber: 120,
                                 columnNumber: 25
                             }, ("TURBOPACK compile-time value", void 0))
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/CommitmentCard.tsx",
-                        lineNumber: 114,
+                        lineNumber: 112,
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0))
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/CommitmentCard.tsx",
-                lineNumber: 104,
+                lineNumber: 102,
                 columnNumber: 13
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$radix$2d$ui$2f$themes$2f$dist$2f$esm$2f$components$2f$separator$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Separator"], {
@@ -1189,7 +1195,7 @@ const CommitmentCard = ({ commitment, isOwner, isArbiter, currentAddress })=>{
                 }
             }, void 0, false, {
                 fileName: "[project]/components/CommitmentCard.tsx",
-                lineNumber: 133,
+                lineNumber: 131,
                 columnNumber: 13
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$radix$2d$ui$2f$themes$2f$dist$2f$esm$2f$components$2f$flex$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Flex"], {
@@ -1206,10 +1212,10 @@ const CommitmentCard = ({ commitment, isOwner, isArbiter, currentAddress })=>{
                                 style: {
                                     width: "120px"
                                 },
-                                children: "👤 Người tạo:"
+                                children: "👤 Owner:"
                             }, void 0, false, {
                                 fileName: "[project]/components/CommitmentCard.tsx",
-                                lineNumber: 138,
+                                lineNumber: 136,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$radix$2d$ui$2f$themes$2f$dist$2f$esm$2f$components$2f$text$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Text"], {
@@ -1220,22 +1226,22 @@ const CommitmentCard = ({ commitment, isOwner, isArbiter, currentAddress })=>{
                                 children: shortenAddress(commitment.owner)
                             }, void 0, false, {
                                 fileName: "[project]/components/CommitmentCard.tsx",
-                                lineNumber: 139,
+                                lineNumber: 137,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0)),
                             isOwner && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$radix$2d$ui$2f$themes$2f$dist$2f$esm$2f$components$2f$badge$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Badge"], {
                                 color: "blue",
                                 size: "1",
-                                children: "Bạn"
+                                children: "You"
                             }, void 0, false, {
                                 fileName: "[project]/components/CommitmentCard.tsx",
-                                lineNumber: 142,
+                                lineNumber: 140,
                                 columnNumber: 33
                             }, ("TURBOPACK compile-time value", void 0))
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/CommitmentCard.tsx",
-                        lineNumber: 137,
+                        lineNumber: 135,
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$radix$2d$ui$2f$themes$2f$dist$2f$esm$2f$components$2f$flex$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Flex"], {
@@ -1248,10 +1254,10 @@ const CommitmentCard = ({ commitment, isOwner, isArbiter, currentAddress })=>{
                                 style: {
                                     width: "120px"
                                 },
-                                children: "👨‍⚖️ Trọng tài:"
+                                children: "👨‍⚖️ Arbiter:"
                             }, void 0, false, {
                                 fileName: "[project]/components/CommitmentCard.tsx",
-                                lineNumber: 146,
+                                lineNumber: 144,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$radix$2d$ui$2f$themes$2f$dist$2f$esm$2f$components$2f$text$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Text"], {
@@ -1262,22 +1268,22 @@ const CommitmentCard = ({ commitment, isOwner, isArbiter, currentAddress })=>{
                                 children: shortenAddress(commitment.arbiter)
                             }, void 0, false, {
                                 fileName: "[project]/components/CommitmentCard.tsx",
-                                lineNumber: 147,
+                                lineNumber: 145,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0)),
                             isArbiter && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$radix$2d$ui$2f$themes$2f$dist$2f$esm$2f$components$2f$badge$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Badge"], {
                                 color: "purple",
                                 size: "1",
-                                children: "Bạn"
+                                children: "You"
                             }, void 0, false, {
                                 fileName: "[project]/components/CommitmentCard.tsx",
-                                lineNumber: 150,
+                                lineNumber: 148,
                                 columnNumber: 35
                             }, ("TURBOPACK compile-time value", void 0))
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/CommitmentCard.tsx",
-                        lineNumber: 145,
+                        lineNumber: 143,
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$radix$2d$ui$2f$themes$2f$dist$2f$esm$2f$components$2f$flex$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Flex"], {
@@ -1290,10 +1296,10 @@ const CommitmentCard = ({ commitment, isOwner, isArbiter, currentAddress })=>{
                                 style: {
                                     width: "120px"
                                 },
-                                children: "🔥 Nhận phạt:"
+                                children: "🔥 Penalty To:"
                             }, void 0, false, {
                                 fileName: "[project]/components/CommitmentCard.tsx",
-                                lineNumber: 154,
+                                lineNumber: 152,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$radix$2d$ui$2f$themes$2f$dist$2f$esm$2f$components$2f$text$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Text"], {
@@ -1301,22 +1307,22 @@ const CommitmentCard = ({ commitment, isOwner, isArbiter, currentAddress })=>{
                                 style: {
                                     fontFamily: "monospace"
                                 },
-                                children: commitment.penaltyRecipient === "0x0000000000000000000000000000000000000000000000000000000000000000" ? "Burn Address (đốt tiền)" : shortenAddress(commitment.penaltyRecipient)
+                                children: commitment.penaltyRecipient === "0x0000000000000000000000000000000000000000000000000000000000000000" ? "Burn Address" : shortenAddress(commitment.penaltyRecipient)
                             }, void 0, false, {
                                 fileName: "[project]/components/CommitmentCard.tsx",
-                                lineNumber: 155,
+                                lineNumber: 153,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0))
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/CommitmentCard.tsx",
-                        lineNumber: 153,
+                        lineNumber: 151,
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0))
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/CommitmentCard.tsx",
-                lineNumber: 136,
+                lineNumber: 134,
                 columnNumber: 13
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$radix$2d$ui$2f$themes$2f$dist$2f$esm$2f$components$2f$separator$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Separator"], {
@@ -1326,7 +1332,7 @@ const CommitmentCard = ({ commitment, isOwner, isArbiter, currentAddress })=>{
                 }
             }, void 0, false, {
                 fileName: "[project]/components/CommitmentCard.tsx",
-                lineNumber: 163,
+                lineNumber: 161,
                 columnNumber: 13
             }, ("TURBOPACK compile-time value", void 0)),
             commitment.status === __TURBOPACK__imported__module__$5b$project$5d2f$hooks$2f$useAntiProcrastination$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["COMMITMENT_STATUS"].PENDING && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$radix$2d$ui$2f$themes$2f$dist$2f$esm$2f$components$2f$box$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Box"], {
@@ -1341,17 +1347,17 @@ const CommitmentCard = ({ commitment, isOwner, isArbiter, currentAddress })=>{
                     children: [
                         "🎯 ",
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("strong", {
-                            children: "Bạn là Trọng tài!"
+                            children: "You are the Arbiter!"
                         }, void 0, false, {
                             fileName: "[project]/components/CommitmentCard.tsx",
-                            lineNumber: 174,
+                            lineNumber: 172,
                             columnNumber: 32
                         }, ("TURBOPACK compile-time value", void 0)),
-                        " Bạn có quyền xác nhận cam kết này đã hoàn thành hay thất bại."
+                        " You can confirm whether this commitment is completed or failed."
                     ]
                 }, void 0, true, {
                     fileName: "[project]/components/CommitmentCard.tsx",
-                    lineNumber: 173,
+                    lineNumber: 171,
                     columnNumber: 25
                 }, ("TURBOPACK compile-time value", void 0)) : isOwner ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$radix$2d$ui$2f$themes$2f$dist$2f$esm$2f$components$2f$text$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Text"], {
                     size: "2",
@@ -1359,30 +1365,30 @@ const CommitmentCard = ({ commitment, isOwner, isArbiter, currentAddress })=>{
                     children: [
                         "📌 ",
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("strong", {
-                            children: "Đây là cam kết của bạn."
+                            children: "This is your commitment."
                         }, void 0, false, {
                             fileName: "[project]/components/CommitmentCard.tsx",
-                            lineNumber: 178,
+                            lineNumber: 176,
                             columnNumber: 32
                         }, ("TURBOPACK compile-time value", void 0)),
-                        " Hãy hoàn thành trước deadline để nhận lại tiền!"
+                        " Complete it before the deadline to get your money back!"
                     ]
                 }, void 0, true, {
                     fileName: "[project]/components/CommitmentCard.tsx",
-                    lineNumber: 177,
+                    lineNumber: 175,
                     columnNumber: 25
                 }, ("TURBOPACK compile-time value", void 0)) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$radix$2d$ui$2f$themes$2f$dist$2f$esm$2f$components$2f$text$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Text"], {
                     size: "2",
                     color: "gray",
-                    children: "👀 Bạn đang xem cam kết của người khác."
+                    children: "👀 You are viewing someone else's commitment."
                 }, void 0, false, {
                     fileName: "[project]/components/CommitmentCard.tsx",
-                    lineNumber: 181,
+                    lineNumber: 179,
                     columnNumber: 25
                 }, ("TURBOPACK compile-time value", void 0))
             }, void 0, false, {
                 fileName: "[project]/components/CommitmentCard.tsx",
-                lineNumber: 167,
+                lineNumber: 165,
                 columnNumber: 17
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$radix$2d$ui$2f$themes$2f$dist$2f$esm$2f$components$2f$box$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Box"], {
@@ -1398,18 +1404,18 @@ const CommitmentCard = ({ commitment, isOwner, isArbiter, currentAddress })=>{
                     ]
                 }, void 0, true, {
                     fileName: "[project]/components/CommitmentCard.tsx",
-                    lineNumber: 190,
+                    lineNumber: 188,
                     columnNumber: 17
                 }, ("TURBOPACK compile-time value", void 0))
             }, void 0, false, {
                 fileName: "[project]/components/CommitmentCard.tsx",
-                lineNumber: 189,
+                lineNumber: 187,
                 columnNumber: 13
             }, ("TURBOPACK compile-time value", void 0))
         ]
     }, void 0, true, {
         fileName: "[project]/components/CommitmentCard.tsx",
-        lineNumber: 78,
+        lineNumber: 76,
         columnNumber: 9
     }, ("TURBOPACK compile-time value", void 0));
 };
@@ -1427,7 +1433,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist
  * ARBITER ACTIONS
  * ============================================================================
  * 
- * Các nút hành động cho trọng tài và sau khi hết hạn
+ * Action buttons for arbiter and expired commitments
  * 
  * ============================================================================
  */ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$radix$2d$ui$2f$themes$2f$dist$2f$esm$2f$components$2f$button$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/@radix-ui/themes/dist/esm/components/button.js [app-ssr] (ecmascript)");
@@ -1444,7 +1450,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$hooks$2f$useAntiProcrastinat
 const ActionButtons = ({ commitment, isArbiter, isOwner, isPending, onConfirmCompleted, onConfirmFailed, onClaimExpired })=>{
     const isExpired = (0, __TURBOPACK__imported__module__$5b$project$5d2f$hooks$2f$useAntiProcrastination$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["isCommitmentExpired"])(commitment.deadline);
     const isPendingStatus = commitment.status === __TURBOPACK__imported__module__$5b$project$5d2f$hooks$2f$useAntiProcrastination$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["COMMITMENT_STATUS"].PENDING;
-    // Không hiển thị nếu cam kết đã được xử lý
+    // Don't show if commitment is already resolved
     if (!isPendingStatus) {
         return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$radix$2d$ui$2f$themes$2f$dist$2f$esm$2f$components$2f$card$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Card"], {
             style: {
@@ -1458,7 +1464,7 @@ const ActionButtons = ({ commitment, isArbiter, isOwner, isPending, onConfirmCom
                 style: {
                     display: "block"
                 },
-                children: commitment.status === __TURBOPACK__imported__module__$5b$project$5d2f$hooks$2f$useAntiProcrastination$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["COMMITMENT_STATUS"].COMPLETED ? "✅ Cam kết này đã được xác nhận hoàn thành. Tiền đã được trả lại cho người tạo." : "❌ Cam kết này đã thất bại. Tiền đã được chuyển đến địa chỉ phạt."
+                children: commitment.status === __TURBOPACK__imported__module__$5b$project$5d2f$hooks$2f$useAntiProcrastination$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["COMMITMENT_STATUS"].COMPLETED ? "✅ This commitment has been confirmed as completed. Funds have been returned to the owner." : "❌ This commitment has failed. Funds have been sent to the penalty address."
             }, void 0, false, {
                 fileName: "[project]/components/ActionButtons.tsx",
                 lineNumber: 47,
@@ -1482,7 +1488,7 @@ const ActionButtons = ({ commitment, isArbiter, isOwner, isPending, onConfirmCom
                     marginBottom: "1rem",
                     display: "block"
                 },
-                children: "⚡ Hành động"
+                children: "⚡ Actions"
             }, void 0, false, {
                 fileName: "[project]/components/ActionButtons.tsx",
                 lineNumber: 58,
@@ -1498,7 +1504,7 @@ const ActionButtons = ({ commitment, isArbiter, isOwner, isPending, onConfirmCom
                         style: {
                             marginBottom: "0.5rem"
                         },
-                        children: "👨‍⚖️ Với tư cách Trọng tài, bạn có thể xác nhận cam kết:"
+                        children: "👨‍⚖️ As the Arbiter, you can verify this commitment:"
                     }, void 0, false, {
                         fileName: "[project]/components/ActionButtons.tsx",
                         lineNumber: 65,
@@ -1523,7 +1529,7 @@ const ActionButtons = ({ commitment, isArbiter, isOwner, isPending, onConfirmCom
                                     fileName: "[project]/components/ActionButtons.tsx",
                                     lineNumber: 78,
                                     columnNumber: 33
-                                }, ("TURBOPACK compile-time value", void 0)) : "✅ Đã hoàn thành"
+                                }, ("TURBOPACK compile-time value", void 0)) : "✅ Mark Completed"
                             }, void 0, false, {
                                 fileName: "[project]/components/ActionButtons.tsx",
                                 lineNumber: 70,
@@ -1544,7 +1550,7 @@ const ActionButtons = ({ commitment, isArbiter, isOwner, isPending, onConfirmCom
                                     fileName: "[project]/components/ActionButtons.tsx",
                                     lineNumber: 92,
                                     columnNumber: 33
-                                }, ("TURBOPACK compile-time value", void 0)) : "❌ Chưa hoàn thành"
+                                }, ("TURBOPACK compile-time value", void 0)) : "❌ Mark Failed"
                             }, void 0, false, {
                                 fileName: "[project]/components/ActionButtons.tsx",
                                 lineNumber: 84,
@@ -1562,7 +1568,7 @@ const ActionButtons = ({ commitment, isArbiter, isOwner, isPending, onConfirmCom
                         style: {
                             marginTop: "0.5rem"
                         },
-                        children: "⚠️ Hành động này không thể hoàn tác. Hãy cân nhắc kỹ trước khi xác nhận!"
+                        children: "⚠️ This action cannot be undone. Please verify carefully before confirming!"
                     }, void 0, false, {
                         fileName: "[project]/components/ActionButtons.tsx",
                         lineNumber: 99,
@@ -1584,7 +1590,7 @@ const ActionButtons = ({ commitment, isArbiter, isOwner, isPending, onConfirmCom
                         style: {
                             marginBottom: "0.5rem"
                         },
-                        children: "⏰ Cam kết đã hết hạn. Bạn vẫn có thể xác nhận thất bại:"
+                        children: "⏰ Commitment has expired. You can still confirm failure:"
                     }, void 0, false, {
                         fileName: "[project]/components/ActionButtons.tsx",
                         lineNumber: 108,
@@ -1602,7 +1608,7 @@ const ActionButtons = ({ commitment, isArbiter, isOwner, isPending, onConfirmCom
                             fileName: "[project]/components/ActionButtons.tsx",
                             lineNumber: 119,
                             columnNumber: 29
-                        }, ("TURBOPACK compile-time value", void 0)) : "❌ Xác nhận thất bại"
+                        }, ("TURBOPACK compile-time value", void 0)) : "❌ Confirm Failed"
                     }, void 0, false, {
                         fileName: "[project]/components/ActionButtons.tsx",
                         lineNumber: 112,
@@ -1625,8 +1631,8 @@ const ActionButtons = ({ commitment, isArbiter, isOwner, isPending, onConfirmCom
                             marginBottom: "0.5rem"
                         },
                         children: [
-                            "⏰ Cam kết đã hết hạn và trọng tài chưa xác nhận.",
-                            isOwner && " Tiền của bạn có thể bị claim bởi bất kỳ ai!"
+                            "⏰ Commitment has expired and arbiter hasn't verified yet.",
+                            isOwner && " Your funds can be claimed by anyone!"
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/ActionButtons.tsx",
@@ -1645,7 +1651,7 @@ const ActionButtons = ({ commitment, isArbiter, isOwner, isPending, onConfirmCom
                             fileName: "[project]/components/ActionButtons.tsx",
                             lineNumber: 142,
                             columnNumber: 29
-                        }, ("TURBOPACK compile-time value", void 0)) : "⚡ Claim hết hạn"
+                        }, ("TURBOPACK compile-time value", void 0)) : "⚡ Claim Expired"
                     }, void 0, false, {
                         fileName: "[project]/components/ActionButtons.tsx",
                         lineNumber: 135,
@@ -1654,7 +1660,7 @@ const ActionButtons = ({ commitment, isArbiter, isOwner, isPending, onConfirmCom
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$radix$2d$ui$2f$themes$2f$dist$2f$esm$2f$components$2f$text$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Text"], {
                         size: "1",
                         color: "gray",
-                        children: "Tiền sẽ được chuyển đến địa chỉ phạt đã được đặt."
+                        children: "Funds will be sent to the penalty address."
                     }, void 0, false, {
                         fileName: "[project]/components/ActionButtons.tsx",
                         lineNumber: 148,
@@ -1673,7 +1679,7 @@ const ActionButtons = ({ commitment, isArbiter, isOwner, isPending, onConfirmCom
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$radix$2d$ui$2f$themes$2f$dist$2f$esm$2f$components$2f$text$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Text"], {
                         size: "2",
                         color: "blue",
-                        children: "⏳ Đang chờ trọng tài xác nhận cam kết của bạn."
+                        children: "⏳ Waiting for arbiter to verify your commitment."
                     }, void 0, false, {
                         fileName: "[project]/components/ActionButtons.tsx",
                         lineNumber: 157,
@@ -1682,7 +1688,7 @@ const ActionButtons = ({ commitment, isArbiter, isOwner, isPending, onConfirmCom
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$radix$2d$ui$2f$themes$2f$dist$2f$esm$2f$components$2f$text$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Text"], {
                         size: "2",
                         color: "gray",
-                        children: "Hãy đảm bảo bạn đã hoàn thành nhiệm vụ và liên hệ trọng tài để xác nhận!"
+                        children: "Make sure you've completed your task and contact your arbiter to verify!"
                     }, void 0, false, {
                         fileName: "[project]/components/ActionButtons.tsx",
                         lineNumber: 160,
@@ -1697,7 +1703,7 @@ const ActionButtons = ({ commitment, isArbiter, isOwner, isPending, onConfirmCom
             !isOwner && !isArbiter && !isExpired && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$radix$2d$ui$2f$themes$2f$dist$2f$esm$2f$components$2f$text$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Text"], {
                 size: "2",
                 color: "gray",
-                children: "👀 Bạn chỉ có thể xem cam kết này. Chỉ trọng tài mới có quyền xác nhận."
+                children: "👀 You can only view this commitment. Only the arbiter can verify it."
             }, void 0, false, {
                 fileName: "[project]/components/ActionButtons.tsx",
                 lineNumber: 168,
@@ -1724,7 +1730,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist
  * LOAD COMMITMENT FORM
  * ============================================================================
  * 
- * Form để load một cam kết đã tồn tại
+ * Form to load an existing commitment
  * 
  * ============================================================================
  */ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/server/route-modules/app-page/vendored/ssr/react.js [app-ssr] (ecmascript)");
@@ -1743,11 +1749,11 @@ const LoadCommitmentForm = ({ onLoad })=>{
         e.preventDefault();
         setError(null);
         if (!commitmentId.trim()) {
-            setError("Vui lòng nhập ID cam kết");
+            setError("Please enter a commitment ID");
             return;
         }
         if (!commitmentId.startsWith("0x")) {
-            setError("ID cam kết phải bắt đầu bằng 0x");
+            setError("Commitment ID must start with 0x");
             return;
         }
         onLoad(commitmentId.trim());
@@ -1761,7 +1767,7 @@ const LoadCommitmentForm = ({ onLoad })=>{
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$radix$2d$ui$2f$themes$2f$dist$2f$esm$2f$components$2f$text$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Text"], {
                     size: "3",
                     weight: "medium",
-                    children: "🔍 Hoặc xem cam kết đã tồn tại"
+                    children: "🔍 Or view an existing commitment"
                 }, void 0, false, {
                     fileName: "[project]/components/LoadCommitmentForm.tsx",
                     lineNumber: 44,
@@ -1775,7 +1781,7 @@ const LoadCommitmentForm = ({ onLoad })=>{
                                 flex: 1
                             },
                             type: "text",
-                            placeholder: "Nhập ID cam kết (0x...)",
+                            placeholder: "Enter commitment ID (0x...)",
                             value: commitmentId,
                             onChange: (e)=>setCommitmentId(e.target.value)
                         }, void 0, false, {
@@ -1786,7 +1792,7 @@ const LoadCommitmentForm = ({ onLoad })=>{
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$radix$2d$ui$2f$themes$2f$dist$2f$esm$2f$components$2f$button$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Button"], {
                             type: "submit",
                             variant: "soft",
-                            children: "Xem"
+                            children: "View"
                         }, void 0, false, {
                             fileName: "[project]/components/LoadCommitmentForm.tsx",
                             lineNumber: 56,
@@ -1833,13 +1839,13 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist
  * ANTI-PROCRASTINATION VAULT - MAIN INTEGRATION
  * ============================================================================
  * 
- * Component chính của ứng dụng Anti-Procrastination Vault
+ * Main component for the Anti-Procrastination Vault application
  * 
- * Tính năng:
- * - Tạo cam kết mới với IOTA stake
- * - Xem chi tiết cam kết
- * - Trọng tài xác nhận hoàn thành/thất bại
- * - Claim tiền sau khi hết hạn
+ * Features:
+ * - Create new commitments with IOTA stake
+ * - View commitment details
+ * - Arbiter can confirm completion/failure
+ * - Claim funds after expiration
  * 
  * ============================================================================
  */ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$iota$2f$dapp$2d$kit$2f$dist$2f$esm$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/@iota/dapp-kit/dist/esm/index.js [app-ssr] (ecmascript)");
@@ -1915,7 +1921,7 @@ const AntiProcrastinationVault = ()=>{
                             size: "3",
                             color: "gray",
                             align: "center",
-                            children: "Cam kết chống trì hoãn với IOTA"
+                            children: "Beat procrastination with IOTA"
                         }, void 0, false, {
                             fileName: "[project]/components/AntiProcrastinationVault.tsx",
                             lineNumber: 63,
@@ -1931,7 +1937,7 @@ const AntiProcrastinationVault = ()=>{
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$radix$2d$ui$2f$themes$2f$dist$2f$esm$2f$components$2f$text$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Text"], {
                             align: "center",
                             color: "gray",
-                            children: "Kết nối ví IOTA của bạn để bắt đầu tạo cam kết và ép bản thân hoàn thành công việc!"
+                            children: "Connect your IOTA wallet to start creating commitments and force yourself to get things done!"
                         }, void 0, false, {
                             fileName: "[project]/components/AntiProcrastinationVault.tsx",
                             lineNumber: 67,
@@ -1998,7 +2004,7 @@ const AntiProcrastinationVault = ()=>{
                             size: "3",
                             color: "gray",
                             align: "center",
-                            children: "Đánh vào tâm lý sợ mất tiền để ép bản thân làm việc"
+                            children: "Use loss aversion to force yourself to work"
                         }, void 0, false, {
                             fileName: "[project]/components/AntiProcrastinationVault.tsx",
                             lineNumber: 93,
@@ -2059,7 +2065,7 @@ const AntiProcrastinationVault = ()=>{
                                     style: {
                                         marginBottom: "1rem"
                                     },
-                                    children: "📖 Cách hoạt động"
+                                    children: "📖 How It Works"
                                 }, void 0, false, {
                                     fileName: "[project]/components/AntiProcrastinationVault.tsx",
                                     lineNumber: 117,
@@ -2084,13 +2090,13 @@ const AntiProcrastinationVault = ()=>{
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$radix$2d$ui$2f$themes$2f$dist$2f$esm$2f$components$2f$text$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Text"], {
                                                     children: [
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("strong", {
-                                                            children: "Tạo cam kết:"
+                                                            children: "Create commitment:"
                                                         }, void 0, false, {
                                                             fileName: "[project]/components/AntiProcrastinationVault.tsx",
                                                             lineNumber: 124,
                                                             columnNumber: 41
                                                         }, ("TURBOPACK compile-time value", void 0)),
-                                                        " Gửi IOTA vào contract với mô tả nhiệm vụ và deadline."
+                                                        " Stake IOTA with a task description and deadline."
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/components/AntiProcrastinationVault.tsx",
@@ -2118,13 +2124,13 @@ const AntiProcrastinationVault = ()=>{
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$radix$2d$ui$2f$themes$2f$dist$2f$esm$2f$components$2f$text$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Text"], {
                                                     children: [
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("strong", {
-                                                            children: "Chọn trọng tài:"
+                                                            children: "Set arbiter:"
                                                         }, void 0, false, {
                                                             fileName: "[project]/components/AntiProcrastinationVault.tsx",
                                                             lineNumber: 130,
                                                             columnNumber: 41
                                                         }, ("TURBOPACK compile-time value", void 0)),
-                                                        " Đặt địa chỉ ví của bạn bè/giáo viên làm người xác nhận."
+                                                        " Choose a friend/teacher's wallet address as the verifier."
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/components/AntiProcrastinationVault.tsx",
@@ -2152,13 +2158,13 @@ const AntiProcrastinationVault = ()=>{
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$radix$2d$ui$2f$themes$2f$dist$2f$esm$2f$components$2f$text$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Text"], {
                                                     children: [
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("strong", {
-                                                            children: "Hoàn thành:"
+                                                            children: "Complete task:"
                                                         }, void 0, false, {
                                                             fileName: "[project]/components/AntiProcrastinationVault.tsx",
                                                             lineNumber: 136,
                                                             columnNumber: 41
                                                         }, ("TURBOPACK compile-time value", void 0)),
-                                                        " Làm việc và báo cho trọng tài khi xong."
+                                                        " Do the work and notify your arbiter when done."
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/components/AntiProcrastinationVault.tsx",
@@ -2186,13 +2192,13 @@ const AntiProcrastinationVault = ()=>{
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$radix$2d$ui$2f$themes$2f$dist$2f$esm$2f$components$2f$text$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Text"], {
                                                     children: [
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("strong", {
-                                                            children: "Thành công:"
+                                                            children: "Success:"
                                                         }, void 0, false, {
                                                             fileName: "[project]/components/AntiProcrastinationVault.tsx",
                                                             lineNumber: 142,
                                                             columnNumber: 41
                                                         }, ("TURBOPACK compile-time value", void 0)),
-                                                        " Trọng tài xác nhận → Nhận lại tiền!"
+                                                        " Arbiter confirms → Get your money back!"
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/components/AntiProcrastinationVault.tsx",
@@ -2220,13 +2226,13 @@ const AntiProcrastinationVault = ()=>{
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$radix$2d$ui$2f$themes$2f$dist$2f$esm$2f$components$2f$text$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Text"], {
                                                     children: [
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("strong", {
-                                                            children: "Thất bại:"
+                                                            children: "Failure:"
                                                         }, void 0, false, {
                                                             fileName: "[project]/components/AntiProcrastinationVault.tsx",
                                                             lineNumber: 148,
                                                             columnNumber: 41
                                                         }, ("TURBOPACK compile-time value", void 0)),
-                                                        " Không hoàn thành hoặc hết hạn → Mất tiền!"
+                                                        " Incomplete or expired → Lose your money!"
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/components/AntiProcrastinationVault.tsx",
@@ -2277,7 +2283,7 @@ const AntiProcrastinationVault = ()=>{
                                         columnNumber: 37
                                     }, ("TURBOPACK compile-time value", void 0)),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$radix$2d$ui$2f$themes$2f$dist$2f$esm$2f$components$2f$text$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Text"], {
-                                        children: "Đang tải cam kết..."
+                                        children: "Loading commitment..."
                                     }, void 0, false, {
                                         fileName: "[project]/components/AntiProcrastinationVault.tsx",
                                         lineNumber: 162,
@@ -2308,8 +2314,8 @@ const AntiProcrastinationVault = ()=>{
                                             color: "var(--red-11)"
                                         },
                                         children: [
-                                            "❌ Lỗi: ",
-                                            state.error.message || "Không thể tải cam kết"
+                                            "❌ Error: ",
+                                            state.error.message || "Unable to load commitment"
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/AntiProcrastinationVault.tsx",
@@ -2331,7 +2337,7 @@ const AntiProcrastinationVault = ()=>{
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$radix$2d$ui$2f$themes$2f$dist$2f$esm$2f$components$2f$button$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Button"], {
                                         variant: "soft",
                                         onClick: actions.clearCommitment,
-                                        children: "← Quay lại"
+                                        children: "← Go Back"
                                     }, void 0, false, {
                                         fileName: "[project]/components/AntiProcrastinationVault.tsx",
                                         lineNumber: 177,
@@ -2356,7 +2362,7 @@ const AntiProcrastinationVault = ()=>{
                                     style: {
                                         alignSelf: "flex-start"
                                     },
-                                    children: "← Tạo cam kết mới"
+                                    children: "← Create new commitment"
                                 }, void 0, false, {
                                     fileName: "[project]/components/AntiProcrastinationVault.tsx",
                                     lineNumber: 191,
@@ -2394,7 +2400,7 @@ const AntiProcrastinationVault = ()=>{
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$radix$2d$ui$2f$themes$2f$dist$2f$esm$2f$components$2f$text$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Text"], {
                                             size: "2",
                                             color: "green",
-                                            children: "✅ Giao dịch thành công!"
+                                            children: "✅ Transaction successful!"
                                         }, void 0, false, {
                                             fileName: "[project]/components/AntiProcrastinationVault.tsx",
                                             lineNumber: 221,
@@ -2441,7 +2447,7 @@ const AntiProcrastinationVault = ()=>{
                         size: "1",
                         color: "gray",
                         align: "center",
-                        children: "💡 Mẹo: Đặt số tiền đủ lớn để bạn sợ mất, nhưng không quá lớn để ảnh hưởng tài chính!"
+                        children: "💡 Tip: Stake enough to feel the fear of losing, but not so much it hurts your finances!"
                     }, void 0, false, {
                         fileName: "[project]/components/AntiProcrastinationVault.tsx",
                         lineNumber: 241,

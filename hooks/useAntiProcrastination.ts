@@ -490,13 +490,13 @@ export const formatIota = (mist: number, decimals = 4): string => {
 export const getStatusText = (status: CommitmentStatus): string => {
     switch (status) {
         case COMMITMENT_STATUS.PENDING:
-            return "⏳ Đang chờ xác nhận"
+            return "⏳ Pending"
         case COMMITMENT_STATUS.COMPLETED:
-            return "✅ Đã hoàn thành"
+            return "✅ Completed"
         case COMMITMENT_STATUS.FAILED:
-            return "❌ Thất bại"
+            return "❌ Failed"
         default:
-            return "Không xác định"
+            return "Unknown"
     }
 }
 
@@ -531,7 +531,7 @@ export const formatTimeRemaining = (deadline: number): string => {
     const diff = deadline - now
 
     if (diff <= 0) {
-        return "Đã hết hạn"
+        return "Expired"
     }
 
     const hours = Math.floor(diff / (1000 * 60 * 60))
@@ -539,8 +539,8 @@ export const formatTimeRemaining = (deadline: number): string => {
 
     if (hours > 24) {
         const days = Math.floor(hours / 24)
-        return `${days} ngày ${hours % 24} giờ`
+        return `${days} days ${hours % 24} hours`
     }
 
-    return `${hours} giờ ${minutes} phút`
+    return `${hours} hours ${minutes} minutes`
 }

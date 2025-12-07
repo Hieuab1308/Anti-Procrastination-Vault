@@ -5,7 +5,7 @@
  * COMMITMENT CARD
  * ============================================================================
  * 
- * Hiển thị thông tin chi tiết của một cam kết
+ * Display detailed information of a commitment
  * 
  * ============================================================================
  */
@@ -16,7 +16,6 @@ import {
     CommitmentData,
     COMMITMENT_STATUS,
     formatIota,
-    getStatusText,
     isCommitmentExpired,
     formatTimeRemaining,
 } from "@/hooks/useAntiProcrastination"
@@ -32,7 +31,6 @@ export const CommitmentCard = ({
     commitment,
     isOwner,
     isArbiter,
-    currentAddress,
 }: CommitmentCardProps) => {
     const [timeRemaining, setTimeRemaining] = useState<string>("")
     const [isExpired, setIsExpired] = useState(false)
@@ -52,13 +50,13 @@ export const CommitmentCard = ({
     const getStatusBadge = () => {
         switch (commitment.status) {
             case COMMITMENT_STATUS.PENDING:
-                return <Badge color="yellow" size="2">⏳ Đang chờ</Badge>
+                return <Badge color="yellow" size="2">⏳ Pending</Badge>
             case COMMITMENT_STATUS.COMPLETED:
-                return <Badge color="green" size="2">✅ Hoàn thành</Badge>
+                return <Badge color="green" size="2">✅ Completed</Badge>
             case COMMITMENT_STATUS.FAILED:
-                return <Badge color="red" size="2">❌ Thất bại</Badge>
+                return <Badge color="red" size="2">❌ Failed</Badge>
             default:
-                return <Badge color="gray" size="2">Không xác định</Badge>
+                return <Badge color="gray" size="2">Unknown</Badge>
         }
     }
 
@@ -68,7 +66,7 @@ export const CommitmentCard = ({
     }
 
     const formatDate = (timestamp: number) => {
-        return new Date(timestamp).toLocaleString("vi-VN", {
+        return new Date(timestamp).toLocaleString("en-US", {
             dateStyle: "medium",
             timeStyle: "short",
         })
@@ -78,7 +76,7 @@ export const CommitmentCard = ({
         <Card style={{ padding: "1.5rem" }}>
             {/* Header */}
             <Flex justify="between" align="center" style={{ marginBottom: "1rem" }}>
-                <Text size="5" weight="bold">📋 Chi tiết Cam kết</Text>
+                <Text size="5" weight="bold">📋 Commitment Details</Text>
                 {getStatusBadge()}
             </Flex>
 
@@ -87,7 +85,7 @@ export const CommitmentCard = ({
             {/* Description */}
             <Box style={{ marginBottom: "1rem" }}>
                 <Text size="2" color="gray" style={{ display: "block", marginBottom: "0.25rem" }}>
-                    Mô tả cam kết:
+                    Description:
                 </Text>
                 <Text size="3" weight="medium" style={{
                     display: "block",
@@ -104,7 +102,7 @@ export const CommitmentCard = ({
             <Flex gap="4" wrap="wrap" style={{ marginBottom: "1rem" }}>
                 <Box style={{ flex: "1 1 200px" }}>
                     <Text size="2" color="gray" style={{ display: "block", marginBottom: "0.25rem" }}>
-                        💰 Số tiền đặt cọc:
+                        💰 Stake Amount:
                     </Text>
                     <Text size="4" weight="bold" color="blue">
                         {formatIota(commitment.stakeAmount)}
@@ -113,7 +111,7 @@ export const CommitmentCard = ({
 
                 <Box style={{ flex: "1 1 200px" }}>
                     <Text size="2" color="gray" style={{ display: "block", marginBottom: "0.25rem" }}>
-                        ⏰ Thời hạn:
+                        ⏰ Deadline:
                     </Text>
                     <Text size="3" weight="medium">
                         {formatDate(commitment.deadline)}
@@ -135,26 +133,26 @@ export const CommitmentCard = ({
             {/* Addresses */}
             <Flex direction="column" gap="2">
                 <Flex align="center" gap="2">
-                    <Text size="2" color="gray" style={{ width: "120px" }}>👤 Người tạo:</Text>
+                    <Text size="2" color="gray" style={{ width: "120px" }}>👤 Owner:</Text>
                     <Text size="2" style={{ fontFamily: "monospace" }}>
                         {shortenAddress(commitment.owner)}
                     </Text>
-                    {isOwner && <Badge color="blue" size="1">Bạn</Badge>}
+                    {isOwner && <Badge color="blue" size="1">You</Badge>}
                 </Flex>
 
                 <Flex align="center" gap="2">
-                    <Text size="2" color="gray" style={{ width: "120px" }}>👨‍⚖️ Trọng tài:</Text>
+                    <Text size="2" color="gray" style={{ width: "120px" }}>👨‍⚖️ Arbiter:</Text>
                     <Text size="2" style={{ fontFamily: "monospace" }}>
                         {shortenAddress(commitment.arbiter)}
                     </Text>
-                    {isArbiter && <Badge color="purple" size="1">Bạn</Badge>}
+                    {isArbiter && <Badge color="purple" size="1">You</Badge>}
                 </Flex>
 
                 <Flex align="center" gap="2">
-                    <Text size="2" color="gray" style={{ width: "120px" }}>🔥 Nhận phạt:</Text>
+                    <Text size="2" color="gray" style={{ width: "120px" }}>🔥 Penalty To:</Text>
                     <Text size="2" style={{ fontFamily: "monospace" }}>
                         {commitment.penaltyRecipient === "0x0000000000000000000000000000000000000000000000000000000000000000"
-                            ? "Burn Address (đốt tiền)"
+                            ? "Burn Address"
                             : shortenAddress(commitment.penaltyRecipient)}
                     </Text>
                 </Flex>
@@ -171,15 +169,15 @@ export const CommitmentCard = ({
                 }}>
                     {isArbiter ? (
                         <Text size="2" color="purple">
-                            🎯 <strong>Bạn là Trọng tài!</strong> Bạn có quyền xác nhận cam kết này đã hoàn thành hay thất bại.
+                            🎯 <strong>You are the Arbiter!</strong> You can confirm whether this commitment is completed or failed.
                         </Text>
                     ) : isOwner ? (
                         <Text size="2" color="blue">
-                            📌 <strong>Đây là cam kết của bạn.</strong> Hãy hoàn thành trước deadline để nhận lại tiền!
+                            📌 <strong>This is your commitment.</strong> Complete it before the deadline to get your money back!
                         </Text>
                     ) : (
                         <Text size="2" color="gray">
-                            👀 Bạn đang xem cam kết của người khác.
+                            👀 You are viewing someone else's commitment.
                         </Text>
                     )}
                 </Box>

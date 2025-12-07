@@ -5,7 +5,7 @@
  * ARBITER ACTIONS
  * ============================================================================
  * 
- * Các nút hành động cho trọng tài và sau khi hết hạn
+ * Action buttons for arbiter and expired commitments
  * 
  * ============================================================================
  */
@@ -40,14 +40,14 @@ export const ActionButtons = ({
     const isExpired = isCommitmentExpired(commitment.deadline)
     const isPendingStatus = commitment.status === COMMITMENT_STATUS.PENDING
 
-    // Không hiển thị nếu cam kết đã được xử lý
+    // Don't show if commitment is already resolved
     if (!isPendingStatus) {
         return (
             <Card style={{ padding: "1rem", background: "var(--gray-a2)" }}>
                 <Text size="3" color="gray" align="center" style={{ display: "block" }}>
                     {commitment.status === COMMITMENT_STATUS.COMPLETED
-                        ? "✅ Cam kết này đã được xác nhận hoàn thành. Tiền đã được trả lại cho người tạo."
-                        : "❌ Cam kết này đã thất bại. Tiền đã được chuyển đến địa chỉ phạt."}
+                        ? "✅ This commitment has been confirmed as completed. Funds have been returned to the owner."
+                        : "❌ This commitment has failed. Funds have been sent to the penalty address."}
                 </Text>
             </Card>
         )
@@ -56,14 +56,14 @@ export const ActionButtons = ({
     return (
         <Card style={{ padding: "1.5rem" }}>
             <Text size="4" weight="bold" style={{ marginBottom: "1rem", display: "block" }}>
-                ⚡ Hành động
+                ⚡ Actions
             </Text>
 
-            {/* Arbiter Actions - Chưa hết hạn */}
+            {/* Arbiter Actions - Not expired */}
             {isArbiter && !isExpired && (
                 <Flex direction="column" gap="3">
                     <Text size="2" color="gray" style={{ marginBottom: "0.5rem" }}>
-                        👨‍⚖️ Với tư cách Trọng tài, bạn có thể xác nhận cam kết:
+                        👨‍⚖️ As the Arbiter, you can verify this commitment:
                     </Text>
 
                     <Flex gap="3" wrap="wrap">
@@ -77,7 +77,7 @@ export const ActionButtons = ({
                             {isPending ? (
                                 <ClipLoader size={16} color="white" />
                             ) : (
-                                "✅ Đã hoàn thành"
+                                "✅ Mark Completed"
                             )}
                         </Button>
 
@@ -91,22 +91,22 @@ export const ActionButtons = ({
                             {isPending ? (
                                 <ClipLoader size={16} color="white" />
                             ) : (
-                                "❌ Chưa hoàn thành"
+                                "❌ Mark Failed"
                             )}
                         </Button>
                     </Flex>
 
                     <Text size="1" color="gray" style={{ marginTop: "0.5rem" }}>
-                        ⚠️ Hành động này không thể hoàn tác. Hãy cân nhắc kỹ trước khi xác nhận!
+                        ⚠️ This action cannot be undone. Please verify carefully before confirming!
                     </Text>
                 </Flex>
             )}
 
-            {/* Arbiter Actions - Đã hết hạn */}
+            {/* Arbiter Actions - Expired */}
             {isArbiter && isExpired && (
                 <Flex direction="column" gap="3">
                     <Text size="2" color="red" style={{ marginBottom: "0.5rem" }}>
-                        ⏰ Cam kết đã hết hạn. Bạn vẫn có thể xác nhận thất bại:
+                        ⏰ Commitment has expired. You can still confirm failure:
                     </Text>
 
                     <Button
@@ -118,18 +118,18 @@ export const ActionButtons = ({
                         {isPending ? (
                             <ClipLoader size={16} color="white" />
                         ) : (
-                            "❌ Xác nhận thất bại"
+                            "❌ Confirm Failed"
                         )}
                     </Button>
                 </Flex>
             )}
 
-            {/* Claim Expired - Ai cũng có thể gọi sau deadline */}
+            {/* Claim Expired - Anyone can call after deadline */}
             {isExpired && !isArbiter && (
                 <Flex direction="column" gap="3">
                     <Text size="2" color="orange" style={{ marginBottom: "0.5rem" }}>
-                        ⏰ Cam kết đã hết hạn và trọng tài chưa xác nhận.
-                        {isOwner && " Tiền của bạn có thể bị claim bởi bất kỳ ai!"}
+                        ⏰ Commitment has expired and arbiter hasn't verified yet.
+                        {isOwner && " Your funds can be claimed by anyone!"}
                     </Text>
 
                     <Button
@@ -141,12 +141,12 @@ export const ActionButtons = ({
                         {isPending ? (
                             <ClipLoader size={16} color="white" />
                         ) : (
-                            "⚡ Claim hết hạn"
+                            "⚡ Claim Expired"
                         )}
                     </Button>
 
                     <Text size="1" color="gray">
-                        Tiền sẽ được chuyển đến địa chỉ phạt đã được đặt.
+                        Funds will be sent to the penalty address.
                     </Text>
                 </Flex>
             )}
@@ -155,10 +155,10 @@ export const ActionButtons = ({
             {isOwner && !isArbiter && !isExpired && (
                 <Flex direction="column" gap="2">
                     <Text size="2" color="blue">
-                        ⏳ Đang chờ trọng tài xác nhận cam kết của bạn.
+                        ⏳ Waiting for arbiter to verify your commitment.
                     </Text>
                     <Text size="2" color="gray">
-                        Hãy đảm bảo bạn đã hoàn thành nhiệm vụ và liên hệ trọng tài để xác nhận!
+                        Make sure you've completed your task and contact your arbiter to verify!
                     </Text>
                 </Flex>
             )}
@@ -166,7 +166,7 @@ export const ActionButtons = ({
             {/* Not owner, not arbiter, not expired */}
             {!isOwner && !isArbiter && !isExpired && (
                 <Text size="2" color="gray">
-                    👀 Bạn chỉ có thể xem cam kết này. Chỉ trọng tài mới có quyền xác nhận.
+                    👀 You can only view this commitment. Only the arbiter can verify it.
                 </Text>
             )}
         </Card>

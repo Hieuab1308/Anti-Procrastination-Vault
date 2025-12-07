@@ -5,13 +5,13 @@
  * ANTI-PROCRASTINATION VAULT - MAIN INTEGRATION
  * ============================================================================
  * 
- * Component chính của ứng dụng Anti-Procrastination Vault
+ * Main component for the Anti-Procrastination Vault application
  * 
- * Tính năng:
- * - Tạo cam kết mới với IOTA stake
- * - Xem chi tiết cam kết
- * - Trọng tài xác nhận hoàn thành/thất bại
- * - Claim tiền sau khi hết hạn
+ * Features:
+ * - Create new commitments with IOTA stake
+ * - View commitment details
+ * - Arbiter can confirm completion/failure
+ * - Claim funds after expiration
  * 
  * ============================================================================
  */
@@ -61,11 +61,11 @@ const AntiProcrastinationVault = () => {
                             Anti-Procrastination Vault
                         </Heading>
                         <Text size="3" color="gray" align="center">
-                            Cam kết chống trì hoãn với IOTA
+                            Beat procrastination with IOTA
                         </Text>
                         <Separator size="4" />
                         <Text align="center" color="gray">
-                            Kết nối ví IOTA của bạn để bắt đầu tạo cam kết và ép bản thân hoàn thành công việc!
+                            Connect your IOTA wallet to start creating commitments and force yourself to get things done!
                         </Text>
                     </Flex>
                 </Card>
@@ -91,7 +91,7 @@ const AntiProcrastinationVault = () => {
                         Anti-Procrastination Vault
                     </Heading>
                     <Text size="3" color="gray" align="center">
-                        Đánh vào tâm lý sợ mất tiền để ép bản thân làm việc
+                        Use loss aversion to force yourself to work
                     </Text>
                 </Flex>
 
@@ -115,37 +115,37 @@ const AntiProcrastinationVault = () => {
                         {/* How it works */}
                         <Card style={{ padding: "1.5rem", background: "var(--blue-a2)" }}>
                             <Heading size="4" style={{ marginBottom: "1rem" }}>
-                                📖 Cách hoạt động
+                                📖 How It Works
                             </Heading>
                             <Flex direction="column" gap="3">
                                 <Flex gap="3" align="start">
                                     <Text size="4">1️⃣</Text>
                                     <Text>
-                                        <strong>Tạo cam kết:</strong> Gửi IOTA vào contract với mô tả nhiệm vụ và deadline.
+                                        <strong>Create commitment:</strong> Stake IOTA with a task description and deadline.
                                     </Text>
                                 </Flex>
                                 <Flex gap="3" align="start">
                                     <Text size="4">2️⃣</Text>
                                     <Text>
-                                        <strong>Chọn trọng tài:</strong> Đặt địa chỉ ví của bạn bè/giáo viên làm người xác nhận.
+                                        <strong>Set arbiter:</strong> Choose a friend/teacher's wallet address as the verifier.
                                     </Text>
                                 </Flex>
                                 <Flex gap="3" align="start">
                                     <Text size="4">3️⃣</Text>
                                     <Text>
-                                        <strong>Hoàn thành:</strong> Làm việc và báo cho trọng tài khi xong.
+                                        <strong>Complete task:</strong> Do the work and notify your arbiter when done.
                                     </Text>
                                 </Flex>
                                 <Flex gap="3" align="start">
                                     <Text size="4">✅</Text>
                                     <Text>
-                                        <strong>Thành công:</strong> Trọng tài xác nhận → Nhận lại tiền!
+                                        <strong>Success:</strong> Arbiter confirms → Get your money back!
                                     </Text>
                                 </Flex>
                                 <Flex gap="3" align="start">
                                     <Text size="4">❌</Text>
                                     <Text>
-                                        <strong>Thất bại:</strong> Không hoàn thành hoặc hết hạn → Mất tiền!
+                                        <strong>Failure:</strong> Incomplete or expired → Lose your money!
                                     </Text>
                                 </Flex>
                             </Flex>
@@ -159,7 +159,7 @@ const AntiProcrastinationVault = () => {
                             <Card style={{ padding: "2rem" }}>
                                 <Flex justify="center" align="center" gap="3">
                                     <ClipLoader size={24} />
-                                    <Text>Đang tải cam kết...</Text>
+                                    <Text>Loading commitment...</Text>
                                 </Flex>
                             </Card>
                         )}
@@ -169,7 +169,7 @@ const AntiProcrastinationVault = () => {
                             <Card style={{ padding: "1.5rem", background: "var(--red-a3)" }}>
                                 <Flex direction="column" gap="3">
                                     <Text style={{ color: "var(--red-11)" }}>
-                                        ❌ Lỗi: {state.error.message || "Không thể tải cam kết"}
+                                        ❌ Error: {state.error.message || "Unable to load commitment"}
                                     </Text>
                                     <Text size="2" color="gray">
                                         ID: {commitmentId}
@@ -178,7 +178,7 @@ const AntiProcrastinationVault = () => {
                                         variant="soft"
                                         onClick={actions.clearCommitment}
                                     >
-                                        ← Quay lại
+                                        ← Go Back
                                     </Button>
                                 </Flex>
                             </Card>
@@ -193,7 +193,7 @@ const AntiProcrastinationVault = () => {
                                     onClick={actions.clearCommitment}
                                     style={{ alignSelf: "flex-start" }}
                                 >
-                                    ← Tạo cam kết mới
+                                    ← Create new commitment
                                 </Button>
 
                                 {/* Commitment Card */}
@@ -219,7 +219,7 @@ const AntiProcrastinationVault = () => {
                                 {state.hash && (
                                     <Card style={{ padding: "1rem", background: "var(--green-a2)" }}>
                                         <Text size="2" color="green">
-                                            ✅ Giao dịch thành công!
+                                            ✅ Transaction successful!
                                         </Text>
                                         <Text size="1" style={{
                                             fontFamily: "monospace",
@@ -239,7 +239,7 @@ const AntiProcrastinationVault = () => {
                 {/* Footer */}
                 <Flex justify="center" style={{ marginTop: "3rem", paddingBottom: "2rem" }}>
                     <Text size="1" color="gray" align="center">
-                        💡 Mẹo: Đặt số tiền đủ lớn để bạn sợ mất, nhưng không quá lớn để ảnh hưởng tài chính!
+                        💡 Tip: Stake enough to feel the fear of losing, but not so much it hurts your finances!
                     </Text>
                 </Flex>
             </Container>

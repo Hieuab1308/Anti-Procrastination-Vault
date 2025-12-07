@@ -5,7 +5,7 @@
  * LOAD COMMITMENT FORM
  * ============================================================================
  * 
- * Form để load một cam kết đã tồn tại
+ * Form to load an existing commitment
  * 
  * ============================================================================
  */
@@ -26,12 +26,12 @@ export const LoadCommitmentForm = ({ onLoad }: LoadCommitmentFormProps) => {
         setError(null)
 
         if (!commitmentId.trim()) {
-            setError("Vui lòng nhập ID cam kết")
+            setError("Please enter a commitment ID")
             return
         }
 
         if (!commitmentId.startsWith("0x")) {
-            setError("ID cam kết phải bắt đầu bằng 0x")
+            setError("Commitment ID must start with 0x")
             return
         }
 
@@ -42,19 +42,19 @@ export const LoadCommitmentForm = ({ onLoad }: LoadCommitmentFormProps) => {
         <form onSubmit={handleSubmit}>
             <Flex direction="column" gap="3">
                 <Text size="3" weight="medium">
-                    🔍 Hoặc xem cam kết đã tồn tại
+                    🔍 Or view an existing commitment
                 </Text>
 
                 <Flex gap="2">
                     <TextField.Root
                         style={{ flex: 1 }}
                         type="text"
-                        placeholder="Nhập ID cam kết (0x...)"
+                        placeholder="Enter commitment ID (0x...)"
                         value={commitmentId}
                         onChange={(e) => setCommitmentId(e.target.value)}
                     />
                     <Button type="submit" variant="soft">
-                        Xem
+                        View
                     </Button>
                 </Flex>
 
