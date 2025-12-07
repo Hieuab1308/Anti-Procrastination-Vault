@@ -1,7 +1,7 @@
 # 🔒 Anti-Procrastination Vault
 
 A decentralized application (dApp) built on **IOTA blockchain** that uses behavioral psychology to help you beat procrastination. Stake your IOTA tokens on a commitment - complete your task on time to get your money back, or lose it if you fail!
-
+Contrac address: https://explorer.iota.org/object/0xc0e447054ede5a213d75764fb806bc7464af16e9166484c892526d4a3362bcbf?network=testnet
 ## 🎯 Overview
 
 This project leverages the **Loss Aversion** principle - humans fear losing money more than they enjoy gaining it. By putting real value at stake, you create powerful motivation to follow through on your commitments.
