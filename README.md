@@ -1,92 +1,163 @@
-# 🔒 Anti-Procrastination Vault (Cam Kết Chống Trì Hoãn)
+# 🔒 Anti-Procrastination Vault
 
-**Đánh vào tâm lý sợ mất tiền để ép bản thân làm việc!**
+A decentralized application (dApp) built on **IOTA blockchain** that uses behavioral psychology to help you beat procrastination. Stake your IOTA tokens on a commitment - complete your task on time to get your money back, or lose it if you fail!
 
-Một ứng dụng dApp trên IOTA blockchain giúp bạn tạo cam kết hoàn thành công việc với stake IOTA. Nếu không hoàn thành đúng hạn, tiền sẽ bị mất!
+## 🎯 Overview
 
-## 🎯 Tính năng
+This project leverages the **Loss Aversion** principle - humans fear losing money more than they enjoy gaining it. By putting real value at stake, you create powerful motivation to follow through on your commitments.
 
-- ✅ **Tạo cam kết** với stake IOTA (đặt cọc tiền)
-- ✅ **Chỉ định trọng tài** (bạn bè, giáo viên) để xác nhận
-- ✅ **Đặt deadline** cho công việc
-- ✅ **Nhận lại tiền** khi hoàn thành đúng hạn
-- ✅ **Mất tiền** nếu thất bại (chuyển đến burn address hoặc từ thiện)
+### Key Features
 
-## 📖 Cách hoạt động
+- 💰 **Stake IOTA tokens** on your commitments
+- 👤 **Assign an arbiter** (friend, mentor, colleague) to verify completion
+- ⏰ **Set deadlines** for your tasks
+- ✅ **Get refunded** when you complete on time
+- ❌ **Lose your stake** if you fail (sent to charity or burn address)
 
-1. **Tạo cam kết**: Gửi IOTA vào contract với mô tả nhiệm vụ
-2. **Chọn trọng tài**: Đặt địa chỉ ví của người xác nhận
-3. **Đặt deadline**: Chọn thời hạn hoàn thành
-4. **Hoàn thành công việc**: Làm xong và báo trọng tài
-5. **Kết quả**:
-   - ✅ Trọng tài xác nhận "Đã xong" → Nhận lại tiền!
-   - ❌ Không hoàn thành hoặc hết hạn → Mất tiền!
+## 🚀 Getting Started
 
-## 🚀 Quick Start
+### Prerequisites
+
+- Node.js 18+
+- IOTA wallet (with devnet tokens for testing)
+- Git
+
+### Installation
 
 ```bash
+# Clone the repository
+git clone https://github.com/Hieuab1308/Anti-Procrastination-Vault.git
+cd Anti-Procrastination-Vault
+
 # Install dependencies
 npm install --legacy-peer-deps
-
-# Deploy smart contract lên IOTA devnet/testnet
-npm run iota-deploy
 
 # Start development server
 npm run dev
 ```
 
+The app will be running at `http://localhost:3000`
+
+### Deploy Smart Contract (Optional)
+
+If you want to deploy your own instance of the smart contract:
+
+```bash
+# Deploy to IOTA devnet
+npm run iota-deploy
+```
+
+After deployment, update the `PACKAGE_ID` in `lib/config.ts` with your new package ID.
+
 ## 📁 Project Structure
 
 ```
-├── app/                    # Next.js app directory
-├── components/
-│   ├── AntiProcrastinationVault.tsx  # Main component
-│   ├── CreateCommitmentForm.tsx      # Form tạo cam kết
-│   ├── CommitmentCard.tsx            # Hiển thị chi tiết cam kết
-│   ├── ActionButtons.tsx             # Nút hành động
-│   └── LoadCommitmentForm.tsx        # Load cam kết có sẵn
+anti_procrastination/
+├── app/                          # Next.js App Router
+│   ├── layout.tsx                # Root layout
+│   ├── page.tsx                  # Home page
+│   └── globals.css               # Global styles
+│
+├── components/                   # React components
+│   ├── AntiProcrastinationVault.tsx   # Main vault component
+│   ├── CreateCommitmentForm.tsx       # Form to create new commitment
+│   ├── CommitmentCard.tsx             # Display commitment details
+│   ├── ActionButtons.tsx              # Arbiter action buttons
+│   ├── LoadCommitmentForm.tsx         # Load existing commitment
+│   ├── Provider.tsx                   # IOTA providers wrapper
+│   └── Wallet-connect.tsx             # Wallet connection button
+│
 ├── hooks/
-│   └── useAntiProcrastination.ts     # Hook tương tác contract
+│   └── useAntiProcrastination.ts      # Custom hook for contract interaction
+│
 ├── lib/
-│   └── config.ts                     # Cấu hình network & package ID
-└── contract/
-    └── anti_procrastination/
-        └── sources/
-            └── anti_procrastination.move  # Smart contract
+│   └── config.ts                      # Network & contract configuration
+│
+├── contract/                     # ⭐ SMART CONTRACT
+│   └── anti_procrastination/
+│       ├── Move.toml                  # Move package manifest
+│       └── sources/
+│           └── anti_procrastination.move  # ⭐ Main smart contract code
+│
+└── scripts/                      # Deployment scripts
+    ├── iota-deploy-wrapper.js
+    └── iota-generate-prompt-wrapper.js
 ```
 
-## 🔧 Smart Contract Functions
+## 📜 Smart Contract
 
-### `create_commitment`
-Tạo cam kết mới với:
-- `stake`: Số IOTA đặt cọc
-- `arbiter`: Địa chỉ trọng tài
-- `penalty_recipient`: Địa chỉ nhận tiền phạt
-- `description`: Mô tả cam kết
-- `deadline`: Thời hạn (timestamp ms)
+**Location:** `contract/anti_procrastination/sources/anti_procrastination.move`
 
-### `confirm_completed`
-Trọng tài xác nhận đã hoàn thành → Trả tiền cho owner
+The smart contract is written in **Move language** and deployed on IOTA blockchain.
 
-### `confirm_failed`
-Trọng tài xác nhận thất bại → Chuyển tiền đến penalty_recipient
+### Contract Functions
 
-### `claim_expired`
-Ai cũng có thể gọi sau deadline → Chuyển tiền đến penalty_recipient
+| Function | Description | Who can call |
+|----------|-------------|--------------|
+| `create_commitment` | Create a new commitment with stake | Anyone |
+| `confirm_completed` | Mark task as completed, refund stake | Arbiter only |
+| `confirm_failed` | Mark task as failed, send stake to penalty recipient | Arbiter only |
+| `claim_expired` | Claim expired commitment after deadline | Anyone |
 
-## 💡 Tâm lý học hành vi
+### Contract Parameters
 
-Dự án này sử dụng nguyên tắc **Loss Aversion** (sợ mất mát):
-- Con người sợ mất tiền hơn là thích được tiền
-- Khi đã đặt cọc, bạn sẽ có động lực mạnh mẽ hơn để hoàn thành
-- Trọng tài tạo sức ép xã hội thêm
+When creating a commitment:
+- **stake**: Amount of IOTA to lock (in MIST, 1 IOTA = 1,000,000,000 MIST)
+- **arbiter**: Wallet address of the person who will verify completion
+- **penalty_recipient**: Address to receive stake if task fails
+- **description**: Description of your commitment
+- **deadline**: Unix timestamp (milliseconds) when commitment expires
 
-## 📚 Learn More
+### Deployed Contract
+
+- **Network:** IOTA Devnet
+- **Package ID:** `0x4bc6d4cf476f46711e58a26795a610815265657f34e6efdb6b958daf841a70d7`
+
+## 🔄 How It Works
+
+```
+┌─────────────────┐
+│  1. CREATE      │  User stakes IOTA + sets arbiter + deadline
+└────────┬────────┘
+         │
+         ▼
+┌─────────────────┐
+│  2. DO WORK     │  User completes their task
+└────────┬────────┘
+         │
+         ▼
+┌─────────────────┐
+│  3. VERIFY      │  Arbiter checks if task is done
+└────────┬────────┘
+         │
+    ┌────┴────┐
+    │         │
+    ▼         ▼
+┌───────┐ ┌───────┐
+│SUCCESS│ │FAILED │
+│Refund │ │Penalty│
+└───────┘ └───────┘
+```
+
+## 🛠 Tech Stack
+
+- **Blockchain:** IOTA (Move-based)
+- **Frontend:** Next.js 15, React 19, TypeScript
+- **Wallet:** @iota/dapp-kit
+- **UI:** Radix UI, Tailwind CSS
+- **Smart Contract:** Move Language
+
+## 📚 Resources
 
 - [IOTA Documentation](https://wiki.iota.org/)
-- [IOTA dApp Kit](https://github.com/iotaledger/dapp-kit)
-- [Move Language](https://move-language.github.io/move/)
+- [IOTA dApp Kit](https://docs.iota.org/ts-sdk/dapp-kit)
+- [Move Language Book](https://move-language.github.io/move/)
+
+## 📧 Contact
+
+- **Email:** 22010104@st.phenikaa-uni.edu.vn
+- **GitHub:** [@Hieuab1308](https://github.com/Hieuab1308)
 
 ## 📄 License
 
-MIT
+MIT License - feel free to use this project for learning and development!
